@@ -1,15 +1,17 @@
 import requests
 import json
-from flask import Flask, jsonify, abort, request
+from flask import Flask, abort
 
 import normalize
 import service
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     return "Hello, World!"
+
 
 @app.route('/lead_status/<int:lead_id>', methods=['GET'])
 def get_lead_status(lead_id):
@@ -19,6 +21,7 @@ def get_lead_status(lead_id):
     data_from_lead = normalize.data(lead)
     lead_status = service.classification(data_from_lead)
     return lead_status
+
 
 def get_data_from_lead(lead_id):
     headers = {

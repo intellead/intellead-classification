@@ -1,0 +1,6 @@
+{
+  "name": "Intellead Classification: Python",
+  "description": "A service of classification.",
+  "repository": "https://github.com/intellead/intellead-classification",
+  "keywords": ["intellead", "classification", "python", "django" ],
+}
