@@ -3,35 +3,60 @@ def lead(data):
     profile = lead_profile(data['lead']['fit_score'])
     conversion = int(data['lead']['number_conversions'])
     lead_area = area(data['lead']['custom_fields']['Área'])
-    number_of_employees = number_of_employees_in_office(data['lead']['custom_fields']['Quantos funcionários há na sua empresa nas áreas de Engenharia, Compras, Financeiro, Administrativo e Comercial?'])
+    number_of_employees = 0
+    if data['lead']['custom_fields'].get(('Quantos funcionários há na sua empresa nas áreas de Engenharia, Compras, Financeiro, Administrativo e Comercial?'), 0) != 0:
+        number_of_employees = number_of_employees_in_office(data['lead']['custom_fields']['Quantos funcionários há na sua empresa nas áreas de Engenharia, Compras, Financeiro, Administrativo e Comercial?'])
     company_segment = segment(data['lead']['custom_fields']['Segmento'])
-    wip = works_in_progress(data['lead']['custom_fields']['Sua empresa tem obras em andamento?'])
+    wip = 0
+    if data['lead']['custom_fields'].get(('Sua empresa tem obras em andamento?'), 0) != 0:
+        wip = works_in_progress(data['lead']['custom_fields']['Sua empresa tem obras em andamento?'])
     source_first_conv = source_of_first_convertion(data['lead']['first_conversion']['conversion_origin']['source'])
     source_last_conv = source_of_last_convertion(data['lead']['last_conversion']['conversion_origin']['source'])
-    concern = biggest_concern(data['lead']['custom_fields']['Qual sua maior preocupação hoje?'])
-    business_manage = business_management(data['lead']['custom_fields']['Como sua empresa é gerenciada?'])
-    lack_mat = lack_material(data['lead']['custom_fields']['Costuma faltar material nas suas obras?'])
-    decision = decision_made(data['lead']['custom_fields']['Como as decisões são tomadas?'])
-    difficulties = area_difficulties(data['lead']['custom_fields']['Qual área da sua empresa tem mais dificuldades?'])
-    efficient = efficient_processes(data['lead']['custom_fields']['Sua empresa tem processos eficientes?'])
-    impact_of_a_rain = impact_of_a_rainy_week(data['lead']['custom_fields']['Qual o impacto de uma semana de chuva em sua obra?'])
-    consultant_contact = receive_consultant_contact(data['lead']['custom_fields']['Sim, eu gostaria de receber um contato do consultor para avaliação do software'])
-    interested_in_tool = interested_in_hiring_management_tool(data['lead']['last_conversion']['content']['Tem interesse em contratar ferramenta de gestão?'])
-    looking_for_a_software = looking_for_a_management_software(data['lead']['last_conversion']['content']['Estou a procura de um software de gestão para minha empresa!'])
-    normalized_data = (role, profile, conversion, lead_area, number_of_employees, company_segment, wip, source_first_conv, source_last_conv, concern, business_manage, lack_mat, decision, difficulties, efficient, impact_of_a_rain, consultant_contact, interested_in_tool, looking_for_a_software)
+    concern = 0
+    if data['lead']['custom_fields'].get(('Qual sua maior preocupação hoje?'), 0) != 0:
+        concern = biggest_concern(data['lead']['custom_fields']['Qual sua maior preocupação hoje?'])
+    business_manage = 0
+    if data['lead']['custom_fields'].get(('Como sua empresa é gerenciada?'), 0) != 0:
+        business_manage = business_management(data['lead']['custom_fields']['Como sua empresa é gerenciada?'])
+    lack_mat = 0
+    if data['lead']['custom_fields'].get(('Costuma faltar material nas suas obras?'), 0) != 0:
+        lack_mat = lack_material(data['lead']['custom_fields']['Costuma faltar material nas suas obras?'])
+    decision = 0
+    if data['lead']['custom_fields'].get(('Como as decisões são tomadas?'), 0) != 0:
+        decision = decision_made(data['lead']['custom_fields']['Como as decisões são tomadas?'])
+    difficulties = 0
+    if data['lead']['custom_fields'].get(('Qual área da sua empresa tem mais dificuldades?'), 0) != 0:
+        difficulties = area_difficulties(data['lead']['custom_fields']['Qual área da sua empresa tem mais dificuldades?'])
+    efficient = 0
+    if data['lead']['custom_fields'].get(('Sua empresa tem processos eficientes?'), 0) != 0:
+        efficient = efficient_processes(data['lead']['custom_fields']['Sua empresa tem processos eficientes?'])
+    impact_of_a_rain = 0
+    if data['lead']['custom_fields'].get(('Qual o impacto de uma semana de chuva em sua obra?'), 0) != 0:
+        impact_of_a_rain = impact_of_a_rainy_week(data['lead']['custom_fields']['Qual o impacto de uma semana de chuva em sua obra?'])
+    consultant_contact = 0
+    if data['lead']['custom_fields'].get(('Sim, eu gostaria de receber um contato do consultor para avaliação do software'), 0) != 0:
+        consultant_contact = receive_consultant_contact(data['lead']['custom_fields']['Sim, eu gostaria de receber um contato do consultor para avaliação do software'])
+    interested_in_tool = 0
+    if data['lead']['custom_fields'].get(('Tem interesse em contratar ferramenta de gestão?'), 0) != 0:
+        interested_in_tool = interested_in_hiring_management_tool(data['lead']['last_conversion']['content']['Tem interesse em contratar ferramenta de gestão?'])
+    looking_for_a_software = 0
+    if data['lead']['custom_fields'].get(('Estou a procura de um software de gestão para minha empresa!'), 0) != 0:
+        looking_for_a_software = looking_for_a_management_software(data['lead']['last_conversion']['content']['Estou a procura de um software de gestão para minha empresa!'])
+    #normalized_data = (role, profile, conversion, lead_area, number_of_employees, company_segment, wip, source_first_conv, source_last_conv, concern, business_manage, lack_mat, decision, difficulties, efficient, impact_of_a_rain, consultant_contact, interested_in_tool, looking_for_a_software)
+    normalized_data = (role, profile, conversion, lead_area, number_of_employees, company_segment, wip, source_first_conv, source_last_conv, concern, looking_for_a_software)
     return normalized_data
 
 
 def job_title(data):
-    if data is None | data == '':
+    if (data is None) | (data == '') | (data == 'unknow'):
         return 0
     elif data == 'Sócio/Proprietário':
         return 1
-    elif data == 'ADM' | data == 'adm':
+    elif (data == 'ADM') | (data == 'adm'):
         return 2
-    elif data == 'Aluno' | data == 'Estudante':
+    elif (data == 'Aluno') | (data == 'Estudante'):
         return 3
-    elif data == 'TI' | data == 'ti':
+    elif (data == 'TI') | (data == 'ti'):
         return 4
     elif data == 'Analista':
         return 5
@@ -61,7 +86,7 @@ def job_title(data):
         return 17
     elif data == 'Gerente de planejamento':
         return 18
-    elif data == 'Outros':
+    elif (data == 'Outros') | (data == 'outros'):
         return 19
     elif data == 'Proprietário':
         return 20
@@ -83,7 +108,7 @@ def lead_profile(data):
 
 
 def area(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 0
     elif data == 'Arquiterura':
         return 1
@@ -101,20 +126,20 @@ def area(data):
         return 7
     elif data == 'Planejamento':
         return 8
-    elif data == 'RH' | data == 'rh':
+    elif (data == 'RH') | (data == 'rh'):
         return 9
-    elif data == 'TI' | data == 'ti':
+    elif (data == 'TI') | (data == 'ti'):
         return 10
     elif data == 'Suprimentos':
         return 11
-    elif data == 'Outros' | data == 'outros':
+    elif (data == 'Outros') | (data == 'outros'):
         return 12
     elif data == 'Contabilidade':
         return 13
 
 
 def number_of_employees_in_office(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 0
     elif data == '0 a 4':
         return 1
@@ -132,10 +157,12 @@ def number_of_employees_in_office(data):
         return 7
     elif data == '250 a 499':
         return 8
+    elif data == '500 ou mais':
+        return 9
 
 
 def segment(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 0
     elif data == 'Construtora':
         return 1
@@ -160,7 +187,7 @@ def segment(data):
 
 
 def works_in_progress(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 0
     elif data == 'Não, nenhuma':
         return 1
@@ -175,9 +202,9 @@ def works_in_progress(data):
 
 
 def source_of_first_convertion(data):
-    if data is None | data == '' | data == 'Desconhecido':
+    if (data is None) | (data == '') | (data == 'Desconhecido') | (data == 'unknown'):
         return 0
-    elif data.find('Orgânica') != -1:
+    elif (data.find('Orgânica') != -1) | (data == 'Google') | (data == 'google'):
         return 1
     elif data.find('Paga') != -1:
         return 2
@@ -187,18 +214,19 @@ def source_of_first_convertion(data):
         return 4
     elif data.find('Referência') != -1:
         return 5
-    elif data.find('Social | Facebook') != -1:
+    elif (data.find('Social | Facebook') != -1) | (data.find('Facebook Ads') != -1) | (data == 'Facebook-Ads') | (data == 'Facebook-ads'):
         return 6
     elif data.find('Social') != -1:
         return 7
-    elif data == 'Tráfego Direto':
+    elif (data == 'Tráfego Direto') | (data.find('direct') != -1):
         return 8
 
 
 def source_of_last_convertion(data):
-    if data is None | data == '' | data == 'Desconhecido':
+    print(data)
+    if (data is None) | (data == '') | (data == 'Desconhecido') | (data == 'unknown'):
         return 0
-    elif data.find('Orgânica') != -1:
+    elif (data.find('Orgânica') != -1) | (data == 'Google') | (data == 'google'):
         return 1
     elif data.find('Paga') != -1:
         return 2
@@ -208,16 +236,16 @@ def source_of_last_convertion(data):
         return 4
     elif data.find('Referência') != -1:
         return 5
-    elif data.find('Social | Facebook') != -1:
+    elif (data.find('Social | Facebook') != -1) | (data.find('Facebook Ads') != -1) | (data == 'Facebook-Ads') | (data == 'Facebook-ads'):
         return 6
     elif data.find('Social') != -1:
         return 7
-    elif data == 'Tráfego Direto':
+    elif (data == 'Tráfego Direto') | (data.find('direct') != -1):
         return 8
 
 
 def biggest_concern(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 0
     elif data == 'Vender mais':
         return 1
@@ -232,7 +260,7 @@ def biggest_concern(data):
 
 
 def business_management(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 0
     elif data == 'Eu tenho o que preciso na cabeça mesmo':
         return 1
@@ -245,7 +273,7 @@ def business_management(data):
 
 
 def lack_material(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 0
     elif data == 'De vez em quando falta':
         return 1
@@ -256,7 +284,7 @@ def lack_material(data):
 
 
 def decision_made(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 0
     elif data == 'Eu mesmo decido':
         return 1
@@ -267,13 +295,13 @@ def decision_made(data):
 
 
 def area_difficulties(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 0
     elif data == 'Financeiro':
         return 1
     elif data == 'Engenharia':
         return 2
-    elif data == 'RH' | data == 'rh':
+    elif (data == 'RH') | (data == 'rh'):
         return 3
     elif data == 'Contabilidade':
         return 4
@@ -286,7 +314,7 @@ def area_difficulties(data):
 
 
 def efficient_processes(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 9
     elif data == 'Não':
         return 0
@@ -295,7 +323,7 @@ def efficient_processes(data):
 
 
 def impact_of_a_rainy_week(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 0
     elif data == 'Grande, esses imprevistos atrasam a entrega':
         return 1
@@ -304,7 +332,7 @@ def impact_of_a_rainy_week(data):
 
 
 def receive_consultant_contact(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 9
     elif data == 'Não':
         return 0
@@ -313,7 +341,7 @@ def receive_consultant_contact(data):
 
 
 def interested_in_hiring_management_tool(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 9
     elif data == 'Não':
         return 0
@@ -322,7 +350,7 @@ def interested_in_hiring_management_tool(data):
 
 
 def looking_for_a_management_software(data):
-    if data is None | data == '':
+    if (data is None) | (data == ''):
         return 9
     elif data == 'Não':
         return 0

@@ -10,17 +10,17 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Hello, World!"
+    return "Intellead Classification"
 
 
 @app.route('/lead_status/<int:lead_id>', methods=['GET'])
 def get_lead_status(lead_id):
-    lead = get_data_from_lead(lead_id)
-    if lead == None:
+    json_lead = get_data_from_lead(lead_id)
+    if (json_lead is None) | (json_lead == ''):
         abort(404)
-    data_from_lead = normalize.data(lead)
-    lead_status = service.classification(data_from_lead)
-    return lead_status
+    normalized_data = normalize.lead(json_lead)
+    lead_status = service.classification(normalized_data)
+    return str(lead_status)
 
 
 def get_data_from_lead(lead_id):
