@@ -1,9 +1,18 @@
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
+import psycopg2
+import os
+from boto.s3.connection import S3Connection
+
+
+s3 = S3Connection(os.environ['DATABASE_NAME'], os.environ['DATABASE_USER'], os.environ['DATABASE_PASSWORD'], os.environ['DATABASE_HOST'], os.environ['DATABASE_PORT'])
 
 
 def classification(data_from_lead):
+    dataset = get_dataset_from_database()
+
+
     # x são as entradas e y são as saídas
     #dataset1
     #x = np.genfromtxt('dataset.csv', delimiter=';', usecols=(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21))
@@ -24,3 +33,22 @@ def classification(data_from_lead):
     print('[0] unqualified\n[1] qualified')
     print('According to the lead data, his status is: %d' % (lead_status))
     return lead_status
+
+
+def get_dataset_from_database():
+    rows = [];
+    try:
+        print('Connecting to the PostgreSQL database...')
+        conn = psycopg2.connect(host=os.environ.get('DATABASE_HOST'), database=os.environ.get('DATABASE_NAME'), user=os.environ.get('DATABASE_USER'), password=os.environ.get('DATABASE_PASSWORD'))
+        cur = conn.cursor()
+        cur.execute('SELECT * FROM dataset')
+        rows = cur.fetchall()
+        print("The number of rows: ", cur.rowcount)
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            print('Database connection closed.')
+            return rows
