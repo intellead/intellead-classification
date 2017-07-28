@@ -12,7 +12,7 @@ app = Flask(__name__)
 def index():
     return "Intellead Classification"
 
-@app.route('/lead_status_by_id/<int:lead_id>', methods=['GET'])
+@app.route('/lead_status/<int:lead_id>', methods=['GET'])
 def get_lead_status(lead):
     json_lead = lead
     if (json_lead is None) | (json_lead == ''):
