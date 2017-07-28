@@ -18,6 +18,11 @@ def classification(data_from_lead):
     #x = np.genfromtxt('dataset.csv', delimiter=';', usecols=(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21))
     #y = np.genfromtxt('dataset.csv', delimiter=';', usecols=(22))
     #dataset2
+
+    print('TEST')
+    print(type(dataset))
+    print(type(dataset[0]))
+
     x = np.genfromtxt('dataset.csv', delimiter=';', usecols=(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13))
     y = np.genfromtxt('dataset.csv', delimiter=';', usecols=(14))
     print('The total number of examples in the dataset is: %d' % (len(x)))
