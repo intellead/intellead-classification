@@ -1,3 +1,4 @@
+dj-database-url==0.4.1
 Django==1.11
 Jinja2==2.8
 Flask==0.10.1
@@ -11,7 +12,7 @@ Flask-WhooshAlchemy==0.56
 gunicorn==19.6.0
 whitenoise==2.0.6
 ipython[all]>=3.2.0
-pyzmq>=14.7.0
+pyzmq>=14
 Pillow>=2.9.0
 numpy>=1.9.2
 scipy>=0.15.1
@@ -19,4 +20,7 @@ scikit-learn>=0.18
 matplotlib>=1.4.3
 pandas>=0.19
 sklearn
-requests==2.8.1
+requests==2.9.1
+ipython
+psycopg2
+boto

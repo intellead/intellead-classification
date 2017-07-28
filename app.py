@@ -1,5 +1,8 @@
 import requests
 import json
+import psycopg2
+import os
+from boto.s3.connection import S3Connection
 from flask import Flask, abort
 
 import normalize
@@ -7,6 +10,7 @@ import service
 
 app = Flask(__name__)
 
+s3 = S3Connection(os.environ['DATABASE_NAME'], os.environ['DATABASE_USER'], os.environ['DATABASE_PASSWORD'], os.environ['DATABASE_HOST'], os.environ['DATABASE_PORT'])
 
 @app.route('/')
 def index():
@@ -15,6 +19,20 @@ def index():
 
 @app.route('/lead_status/<int:lead_id>', methods=['GET'])
 def get_lead_status(lead_id):
+    try:
+        print('Connecting to the PostgreSQL database...')
+        conn = psycopg2.connect(host=os.environ.get('DATABASE_HOST'), database=os.environ.get('DATABASE_NAME'), user=os.environ.get('DATABASE_USER'), password=os.environ.get('DATABASE_PASSWORD'))
+        cur = conn.cursor()
+        cur.execute('SELECT version()')
+        db_version = cur.fetchone()
+        print(db_version)
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            print('Database connection closed.')
     json_lead = get_data_from_lead(lead_id)
     if (json_lead is None) | (json_lead == ''):
         abort(404)
