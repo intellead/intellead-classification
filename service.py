@@ -11,8 +11,11 @@ s3 = S3Connection(os.environ['DATABASE_NAME'], os.environ['DATABASE_USER'], os.e
 
 def classification(data_from_lead):
     dataset = get_dataset_from_database()
+    print('return dataset')
     x = get_dataset_input_from_database()
+    print('return input dataset')
     y = get_dataset_output_from_database()
+    print('return output dataset')
     # x são as entradas e y são as saídas
     #dataset1
     #x = np.genfromtxt('dataset.csv', delimiter=';', usecols=(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21))
