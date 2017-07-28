@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17a889d7-7f63-458a-8696-3c6bfcc4bf44" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service.py" afterPath="$PROJECT_DIR$/service.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,7 +19,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="141">
@@ -31,14 +31,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="service.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="service.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/service.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="8" column="3" lean-forward="false" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+            <state relative-caret-position="300">
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
-                <marker date="1501268891000" expanded="true" signature="2070:2091" ph="SELECT * FRO... dataset" />
+                <marker date="1501269971000" expanded="true" signature="1918:1939" ph="SELECT * FRO... dataset" />
+                <marker date="1501269971000" expanded="true" signature="2408:2628" ph="SELECT * FRO... dataset" />
+                <marker date="1501269971000" expanded="true" signature="3007:3038" ph="SELECT * FRO... dataset" />
               </folding>
             </state>
           </provider>
@@ -146,8 +148,8 @@
         <option value="$PROJECT_DIR$/runtime.txt" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/settings.py" />
-        <option value="$PROJECT_DIR$/service.py" />
         <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/service.py" />
       </list>
     </option>
   </component>
@@ -547,7 +549,9 @@
           <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501268891000" expanded="true" signature="2070:2091" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="1918:1939" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="2408:2628" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="3007:3038" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -568,7 +572,9 @@
           <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="28" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501268891000" expanded="true" signature="2070:2091" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="1918:1939" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="2408:2628" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="3007:3038" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -628,7 +634,9 @@
           <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="28" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501268891000" expanded="true" signature="2070:2091" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="1918:1939" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="2408:2628" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="3007:3038" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -688,7 +696,9 @@
           <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="17" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501268891000" expanded="true" signature="2070:2091" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="1918:1939" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="2408:2628" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="3007:3038" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -718,7 +728,9 @@
           <caret line="31" column="4" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501268891000" expanded="true" signature="2070:2091" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="1918:1939" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="2408:2628" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="3007:3038" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -740,7 +752,9 @@
           <caret line="31" column="4" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501268891000" expanded="true" signature="2070:2091" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="1918:1939" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="2408:2628" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="3007:3038" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -814,23 +828,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataset.csv" />
-    <entry file="file://$PROJECT_DIR$/service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="8" column="3" lean-forward="false" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501268891000" expanded="true" signature="2070:2091" ph="SELECT * FRO... dataset" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
           <caret line="14" column="63" lean-forward="false" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="63" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+            <marker date="1501269971000" expanded="true" signature="1918:1939" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="2408:2628" ph="SELECT * FRO... dataset" />
+            <marker date="1501269971000" expanded="true" signature="3007:3038" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
