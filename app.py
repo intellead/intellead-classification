@@ -23,9 +23,11 @@ def get_lead_status(lead_id):
         print('Connecting to the PostgreSQL database...')
         conn = psycopg2.connect(host=os.environ.get('DATABASE_HOST'), database=os.environ.get('DATABASE_NAME'), user=os.environ.get('DATABASE_USER'), password=os.environ.get('DATABASE_PASSWORD'))
         cur = conn.cursor()
-        cur.execute('SELECT version()')
-        db_version = cur.fetchone()
-        print(db_version)
+        cur.execute('SELECT * FROM dataset')
+        rows = cur.fetchall()
+        print("The number of rows: ", cur.rowcount)
+        for row in rows:
+            print(row)
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
@@ -33,6 +35,7 @@ def get_lead_status(lead_id):
         if conn is not None:
             conn.close()
             print('Database connection closed.')
+
     json_lead = get_data_from_lead(lead_id)
     if (json_lead is None) | (json_lead == ''):
         abort(404)
