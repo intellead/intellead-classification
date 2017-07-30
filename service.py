@@ -21,7 +21,7 @@ def classification(data_from_lead):
     print('The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
     print('Lead data:')
     print(data_from_lead)
-    np.reshape(data_from_lead, (1, -1))
+    data_from_lead = np.reshape(1, -1)
     lead_status = knn.predict(data_from_lead)
     print('According to lead data, his status is: %d' % (lead_status))
     print('[0] unqualified [1] qualified')
