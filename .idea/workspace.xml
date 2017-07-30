@@ -35,12 +35,12 @@
         <entry file="file://$PROJECT_DIR$/service.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="260">
-              <caret line="23" column="38" lean-forward="true" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+              <caret line="23" column="38" lean-forward="false" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
-                <marker date="1501416473000" expanded="true" signature="1560:1581" ph="SELECT * FRO... dataset" />
-                <marker date="1501416473000" expanded="true" signature="2050:2248" ph="SELECT * FRO... dataset" />
-                <marker date="1501416473000" expanded="true" signature="2627:2658" ph="SELECT * FRO... dataset" />
+                <marker date="1501416714000" expanded="true" signature="1521:1542" ph="SELECT * FRO... dataset" />
+                <marker date="1501416714000" expanded="true" signature="2011:2209" ph="SELECT * FRO... dataset" />
+                <marker date="1501416714000" expanded="true" signature="2588:2619" ph="SELECT * FRO... dataset" />
               </folding>
             </state>
           </provider>
@@ -523,9 +523,9 @@
           <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501416473000" expanded="true" signature="1560:1581" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2050:2248" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2627:2658" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="1521:1542" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2011:2209" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2588:2619" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -546,9 +546,9 @@
           <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="28" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501416473000" expanded="true" signature="1560:1581" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2050:2248" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2627:2658" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="1521:1542" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2011:2209" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2588:2619" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -606,9 +606,9 @@
           <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="28" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501416473000" expanded="true" signature="1560:1581" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2050:2248" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2627:2658" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="1521:1542" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2011:2209" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2588:2619" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -666,9 +666,9 @@
           <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="17" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501416473000" expanded="true" signature="1560:1581" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2050:2248" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2627:2658" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="1521:1542" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2011:2209" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2588:2619" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -698,9 +698,9 @@
           <caret line="31" column="4" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501416473000" expanded="true" signature="1560:1581" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2050:2248" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2627:2658" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="1521:1542" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2011:2209" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2588:2619" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -722,9 +722,9 @@
           <caret line="31" column="4" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501416473000" expanded="true" signature="1560:1581" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2050:2248" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2627:2658" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="1521:1542" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2011:2209" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2588:2619" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -800,12 +800,12 @@
     <entry file="file://$PROJECT_DIR$/service.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
-          <caret line="23" column="38" lean-forward="true" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+          <caret line="23" column="38" lean-forward="false" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1501416473000" expanded="true" signature="1560:1581" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2050:2248" ph="SELECT * FRO... dataset" />
-            <marker date="1501416473000" expanded="true" signature="2627:2658" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="1521:1542" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2011:2209" ph="SELECT * FRO... dataset" />
+            <marker date="1501416714000" expanded="true" signature="2588:2619" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
