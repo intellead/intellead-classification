@@ -10,31 +10,21 @@ s3 = S3Connection(os.environ['DATABASE_NAME'], os.environ['DATABASE_USER'], os.e
 
 
 def classification(data_from_lead):
-    dataset = get_dataset_from_database()
-    print('return dataset')
-    x = get_dataset_input_from_database()
-    print('return input dataset')
-    y = get_dataset_output_from_database()
-    print('return output dataset')
-    # x são as entradas e y são as saídas
-    #dataset1
-    #x = np.genfromtxt('dataset.csv', delimiter=';', usecols=(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21))
-    #y = np.genfromtxt('dataset.csv', delimiter=';', usecols=(22))
-    #dataset2
-    #x = np.genfromtxt('dataset.csv', delimiter=';', usecols=(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13))
-    #y = np.genfromtxt('dataset.csv', delimiter=';', usecols=(14))
-    print('The total number of examples in the dataset is: %d' % (len(x)))
-    x_treino, x_teste, y_treino, y_teste = train_test_split(x, y, test_size=0.3, random_state=42)
-    print('The number of examples used for training are: %d' % (len(x_treino)))
-    print('The number of examples used for testing are: %d' % (len(x_teste)))
+    inputs = get_dataset_input_from_database()
+    outputs = get_dataset_output_from_database()
+    print('The total number of examples in the dataset is: %d' % (len(inputs)))
+    inputs_training, inputs_test, outputs_training, outputs_test = train_test_split(inputs, outputs, test_size=0.3, random_state=42)
+    print('The number of examples used for training are: %d' % (len(inputs_training)))
+    print('The number of examples used for testing are: %d' % (len(inputs_test)))
     knn = KNeighborsClassifier(n_neighbors=7, p=2)
-    knn.fit(x_treino, y_treino)
-    print('The probability of the algorithm to be right is: %f%%' % (knn.score(x_teste, y_teste) * 100))
+    knn.fit(inputs_training, outputs_training)
+    print('The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
     print('Lead data:')
     print(data_from_lead)
+    np.reshape(data_from_lead, (1, -1))
     lead_status = knn.predict(data_from_lead)
-    print('[0] unqualified\n[1] qualified')
-    print('According to the lead data, his status is: %d' % (lead_status))
+    print('According to lead data, his status is: %d' % (lead_status))
+    print('[0] unqualified [1] qualified')
     return lead_status
 
 

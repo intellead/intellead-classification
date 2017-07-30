@@ -15,34 +15,9 @@ def lead(data):
     concern = 0
     if data['lead']['custom_fields'].get(('Qual sua maior preocupação hoje?'), 0) != 0:
         concern = biggest_concern(data['lead']['custom_fields']['Qual sua maior preocupação hoje?'])
-    business_manage = 0
-    if data['lead']['custom_fields'].get(('Como sua empresa é gerenciada?'), 0) != 0:
-        business_manage = business_management(data['lead']['custom_fields']['Como sua empresa é gerenciada?'])
-    lack_mat = 0
-    if data['lead']['custom_fields'].get(('Costuma faltar material nas suas obras?'), 0) != 0:
-        lack_mat = lack_material(data['lead']['custom_fields']['Costuma faltar material nas suas obras?'])
-    decision = 0
-    if data['lead']['custom_fields'].get(('Como as decisões são tomadas?'), 0) != 0:
-        decision = decision_made(data['lead']['custom_fields']['Como as decisões são tomadas?'])
-    difficulties = 0
-    if data['lead']['custom_fields'].get(('Qual área da sua empresa tem mais dificuldades?'), 0) != 0:
-        difficulties = area_difficulties(data['lead']['custom_fields']['Qual área da sua empresa tem mais dificuldades?'])
-    efficient = 0
-    if data['lead']['custom_fields'].get(('Sua empresa tem processos eficientes?'), 0) != 0:
-        efficient = efficient_processes(data['lead']['custom_fields']['Sua empresa tem processos eficientes?'])
-    impact_of_a_rain = 0
-    if data['lead']['custom_fields'].get(('Qual o impacto de uma semana de chuva em sua obra?'), 0) != 0:
-        impact_of_a_rain = impact_of_a_rainy_week(data['lead']['custom_fields']['Qual o impacto de uma semana de chuva em sua obra?'])
-    consultant_contact = 0
-    if data['lead']['custom_fields'].get(('Sim, eu gostaria de receber um contato do consultor para avaliação do software'), 0) != 0:
-        consultant_contact = receive_consultant_contact(data['lead']['custom_fields']['Sim, eu gostaria de receber um contato do consultor para avaliação do software'])
-    interested_in_tool = 0
-    if data['lead']['custom_fields'].get(('Tem interesse em contratar ferramenta de gestão?'), 0) != 0:
-        interested_in_tool = interested_in_hiring_management_tool(data['lead']['last_conversion']['content']['Tem interesse em contratar ferramenta de gestão?'])
     looking_for_a_software = 0
     if data['lead']['custom_fields'].get(('Estou a procura de um software de gestão para minha empresa!'), 0) != 0:
         looking_for_a_software = looking_for_a_management_software(data['lead']['last_conversion']['content']['Estou a procura de um software de gestão para minha empresa!'])
-    #normalized_data = (role, profile, conversion, lead_area, number_of_employees, company_segment, wip, source_first_conv, source_last_conv, concern, business_manage, lack_mat, decision, difficulties, efficient, impact_of_a_rain, consultant_contact, interested_in_tool, looking_for_a_software)
     normalized_data = (role, profile, conversion, lead_area, number_of_employees, company_segment, wip, source_first_conv, source_last_conv, concern, looking_for_a_software)
     return normalized_data
 
