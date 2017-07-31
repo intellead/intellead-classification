@@ -6,7 +6,6 @@ Intellead Classification aims to be an service to classify leads among qualified
 <h2>Description</h2>
 
 This is the classification component of the intellead ecosystem, it implements the needed functionality classify leads.
-This is made using python.
 
 <h2>Python</h2>
 
