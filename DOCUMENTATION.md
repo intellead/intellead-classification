@@ -67,12 +67,12 @@ DATABASE_PASSWORD - Password to connect to the database.
 <h3>Dataset</h3>
 This dataset contains leads from construction industry.<br>
 <h4>Dataset information</h4>
-<b>Data Set Characteristics: </b>Multivariate<br>
-<b>Number of Instances: </b>595<br>
-<b>Attribute Characteristics: </b>Integer<br>
-<b>Number of Attributes: </b>15<br>
-<b>Associated Tasks: </b>Classification<br>
-<b>Missing Values?: </b>No<br>
+Data Set Characteristics: Multivariate<br>
+Number of Instances: 595<br>
+Attribute Characteristics: Integer<br>
+Number of Attributes: 15<br>
+Associated Tasks: Classification<br>
+Missing Values?: No<br>
 <h4>Attribute information</h4>
 1. Company name (string)<br>
 2. E-mail of the lead (string)  <br>
