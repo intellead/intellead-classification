@@ -14,7 +14,12 @@ Intellead Classification aims to be an easy way to identify the qualified lead f
     </ul>
   </li>
   <li>Configuration</li>
-  <li>Dataset</li>
+  <li>Dataset
+    <ul>
+        <li>Dataset information</li>
+        <li>Attribute information</li>
+    </ul>
+  </li>
   <li>Use Cases
     <ul>
       <li>Lead status [/lead_status_by_id]</li>
