@@ -183,7 +183,7 @@ Missing Values?: No<br>
 -- 0 = no<br>
 -- 1 = yes<br>
 -- 9 = unknow<br>
-15. Lead status (class attribute)<br> 
+15. Lead status (class attribute)<br>
 -- 1 = the lead bought the system<br>
 -- 0 = the lead did not buy system<br>
 <h3>Use Cases</h3>
