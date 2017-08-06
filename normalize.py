@@ -18,7 +18,13 @@ def lead(data):
     looking_for_a_software = 0
     if data['lead']['custom_fields'].get(('Estou a procura de um software de gestão para minha empresa!'), 0) != 0:
         looking_for_a_software = looking_for_a_management_software(data['lead']['last_conversion']['content']['Estou a procura de um software de gestão para minha empresa!'])
-    normalized_data = (role, profile, conversion, lead_area, number_of_employees, company_segment, wip, source_first_conv, source_last_conv, concern, looking_for_a_software)
+    main_activity = None
+    if data['lead'].get('main_activity_code') != None:
+        main_activity = cnae(data['lead'].get('main_activity_code'))
+    if main_activity != None:
+        normalized_data = (role, profile, conversion, lead_area, number_of_employees, company_segment, wip, source_first_conv, source_last_conv, concern, looking_for_a_software, main_activity)
+    else:
+        normalized_data = (role, profile, conversion, lead_area, number_of_employees, company_segment, wip, source_first_conv, source_last_conv, concern, looking_for_a_software)
     return normalized_data
 
 
@@ -331,3 +337,73 @@ def looking_for_a_management_software(data):
         return 0
     elif data == 'Sim':
         return 1
+
+
+def cnae(data):
+    if (data is None) | (data == ''):
+        return 0
+    elif data == '43.99-1-99':
+        return 1
+    elif data == '74.90-1-99':
+        return 2
+    elif data == '43.30-4-01':
+        return 3
+    elif data == '42.13-8-00':
+        return 4
+    elif data == '69.20-6-01':
+        return 5
+    elif data == '82.19-9-99':
+        return 6
+    elif data == '68.21-8-01':
+        return 7
+    elif data == '42.21-9-02':
+        return 8
+    elif data == '68.22-6-00':
+        return 9
+    elif data == '68.10-2-02':
+        return 10
+    elif data == '42.92-8-02':
+        return 11
+    elif data == '71.19-7-03':
+        return 12
+    elif data == '43.30-4-04':
+        return 13
+    elif data == '42.22-7-01':
+        return 14
+    elif data == '42.99-5-01':
+        return 15
+    elif data == '23.30-3-01':
+        return 16
+    elif data == '42.21-9-03':
+        return 17
+    elif data == '25.11-0-00':
+        return 18
+    elif data == '68.10-2-03':
+        return 19
+    elif data == '43.13-4-00':
+        return 20
+    elif data == '68.10-2-01':
+        return 21
+    elif data == '43.21-5-00':
+        return 22
+    elif data == '43.30-4-99':
+        return 23
+    elif data == '71.11-1-00':
+        return 24
+    elif data == '42.99-5-99':
+        return 25
+    elif data == '43.99-1-01':
+        return 26
+    elif data == '43.99-1-03':
+        return 27
+    elif data == '42.11-1-01':
+        return 28
+    elif data == '71.12-0-00':
+        return 29
+    elif data == '41.10-7-00':
+        return 30
+    elif data == '41.20-4-00':
+        return 31
+    else:
+        return 999
+
