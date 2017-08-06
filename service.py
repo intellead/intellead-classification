@@ -10,113 +10,21 @@ s3 = S3Connection(os.environ['DATABASE_NAME'], os.environ['DATABASE_USER'], os.e
 
 
 def classification(data_from_lead):
-    inputs = get_dataset_input_from_database(len(data_from_lead))
+    number_of_fields = len(data_from_lead)
+    inputs = get_dataset_input_from_database()
     outputs = get_dataset_output_from_database()
     print('The total number of examples in the dataset is: %d' % (len(inputs)))
     inputs_training, inputs_test, outputs_training, outputs_test = train_test_split(inputs, outputs, test_size=0.3, random_state=42)
     print('The number of examples used for training are: %d' % (len(inputs_training)))
     print('The number of examples used for testing are: %d' % (len(inputs_test)))
-    knn = KNeighborsClassifier(n_neighbors=7, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('7 The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=25, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('25The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=24, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('25The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=23, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('23The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=22, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('22The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=21, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('21The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=20, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('20The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=19, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('19The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=18, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('18The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=17, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('17The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=16, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('16The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=15, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('15The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=14, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('14The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=13, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('13The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=12, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('14The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=14, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('12The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=11, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('11The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=10, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('10The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=9, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('9The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=8, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('8The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=6, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('6The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=5, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('5The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=4, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('4The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=3, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('3The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-    knn = KNeighborsClassifier(n_neighbors=2, p=2)
-    knn.fit(inputs_training, outputs_training)
-    print('2The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-
-
+    if number_of_fields == 11:
+        knn = KNeighborsClassifier(n_neighbors=7, p=2)
+        knn.fit(inputs_training, outputs_training)
+        print('[K=7] The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
+    else:
+        knn = KNeighborsClassifier(n_neighbors=16, p=2)
+        knn.fit(inputs_training, outputs_training)
+        print('[K=16] The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
     print('Lead data:')
     print(data_from_lead)
     lead_status = knn.predict(data_from_lead)
