@@ -30,7 +30,7 @@ def lead(data):
     if data['lead']['custom_fields'].get(('Estou a procura de um software de gestão para minha empresa!'), 0) != 0:
         looking_for_a_software = looking_for_a_management_software(data['lead']['last_conversion']['content']['Estou a procura de um software de gestão para minha empresa!'])
     dict.update(normalized_data, looking_for_a_software=looking_for_a_software)
-    if data['lead'].get('main_activity_code') != None:
+    if data['lead'].get('main_activity_code') is not None:
         main_activity = cnae(data['lead'].get('main_activity_code'))
         dict.update(normalized_data, main_activity=main_activity)
     return normalized_data
