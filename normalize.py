@@ -39,31 +39,31 @@ def lead(data):
 def job_title(data):
     if (data is None) | (data == '') | (data == 'unknow'):
         return 0
-    elif data == 'Sócio/Proprietário':
+    elif (data == 'Sócio/Proprietário') | (data == 'sócio/proprietário') | (data == 'Sócio-proprietário') | (data == 'Sócio Proprietário'):
         return 1
     elif (data == 'ADM') | (data == 'adm'):
         return 2
     elif (data == 'Aluno') | (data == 'Estudante'):
         return 3
-    elif (data == 'TI') | (data == 'ti'):
+    elif (data == 'TI') | (data == 'ti') | (data == 'Gestor TI'):
         return 4
-    elif data == 'Analista':
+    elif (data == 'Analista') | (data == 'analista'):
         return 5
-    elif data == 'Assistente':
+    elif (data == 'Assistente') | (data == 'assistente'):
         return 6
-    elif data == 'Autônomo':
+    elif (data == 'Autônomo') | (data == 'autônomo'):
         return 7
     elif (data == 'Consultor') | (data == 'consultor'):
         return 8
     elif data == 'Coordenador de obras':
         return 9
-    elif data == 'Diretor':
+    elif (data == 'Diretor') | (data == 'diretor'):
         return 10
     elif data == 'Engeenheiro e proprietário':
         return 11
     elif data == 'Departamento financeiro':
         return 12
-    elif data == 'Estagiário':
+    elif (data == 'Estagiário') | (data == 'estagiário'):
         return 13
     elif data == 'Gerente administrativo':
         return 14
@@ -71,7 +71,7 @@ def job_title(data):
         return 15
     elif data == 'Gerente geral':
         return 16
-    elif data == 'Gestor de área':
+    elif (data == 'Gestor de área') | (data == 'gestor_de_área') | (data == 'Gestor de Área'):
         return 17
     elif data == 'Gerente de planejamento':
         return 18

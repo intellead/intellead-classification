@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17a889d7-7f63-458a-8696-3c6bfcc4bf44" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DOCUMENTATION.md" afterPath="$PROJECT_DIR$/DOCUMENTATION.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/normalize.py" afterPath="$PROJECT_DIR$/normalize.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,17 +46,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="normalize.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="normalize.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/normalize.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="825">
-              <caret line="55" column="52" lean-forward="false" selection-start-line="55" selection-start-column="52" selection-end-line="55" selection-end-column="52" />
+            <state relative-caret-position="56">
+              <caret line="47" column="62" lean-forward="false" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DOCUMENTATION.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DOCUMENTATION.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DOCUMENTATION.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -125,8 +125,8 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/service.py" />
-        <option value="$PROJECT_DIR$/normalize.py" />
         <option value="$PROJECT_DIR$/DOCUMENTATION.md" />
+        <option value="$PROJECT_DIR$/normalize.py" />
       </list>
     </option>
   </component>
@@ -830,14 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/normalize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="55" column="52" lean-forward="false" selection-start-line="55" selection-start-column="52" selection-end-line="55" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DOCUMENTATION.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -851,6 +843,14 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="123">
           <caret line="185" column="37" lean-forward="false" selection-start-line="185" selection-start-column="37" selection-end-line="185" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/normalize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="47" column="62" lean-forward="false" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
           <folding />
         </state>
       </provider>
