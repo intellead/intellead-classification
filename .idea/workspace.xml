@@ -49,8 +49,8 @@
       <file leaf-file-name="normalize.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/normalize.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="47" column="62" lean-forward="false" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
+            <state relative-caret-position="326">
+              <caret line="173" column="24" lean-forward="false" selection-start-line="173" selection-start-column="18" selection-end-line="173" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -849,8 +849,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/normalize.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="47" column="62" lean-forward="false" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
+        <state relative-caret-position="326">
+          <caret line="173" column="24" lean-forward="false" selection-start-line="173" selection-start-column="18" selection-end-line="173" selection-end-column="24" />
           <folding />
         </state>
       </provider>

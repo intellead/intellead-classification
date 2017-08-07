@@ -99,7 +99,7 @@ def lead_profile(data):
 def area(data):
     if (data is None) | (data == ''):
         return 0
-    elif data == 'Arquiterura':
+    elif data == 'Arquitetura':
         return 1
     elif data == 'Comercial':
         return 2
