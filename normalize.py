@@ -1,31 +1,38 @@
 def lead(data):
+    normalized_data = dict()
     role = job_title(data['lead']['job_title'])
+    dict.update(normalized_data, role=role)
     profile = lead_profile(data['lead']['fit_score'])
+    dict.update(normalized_data, profile=profile)
     conversion = int(data['lead']['number_conversions'])
+    dict.update(normalized_data, conversion=conversion)
     lead_area = area(data['lead']['custom_fields']['Área'])
+    dict.update(normalized_data, lead_area=lead_area)
     number_of_employees = 0
     if data['lead']['custom_fields'].get(('Quantos funcionários há na sua empresa nas áreas de Engenharia, Compras, Financeiro, Administrativo e Comercial?'), 0) != 0:
         number_of_employees = number_of_employees_in_office(data['lead']['custom_fields']['Quantos funcionários há na sua empresa nas áreas de Engenharia, Compras, Financeiro, Administrativo e Comercial?'])
+    dict.update(normalized_data, number_of_employees=number_of_employees)
     company_segment = segment(data['lead']['custom_fields']['Segmento'])
+    dict.update(normalized_data, company_segment=company_segment)
     wip = 0
     if data['lead']['custom_fields'].get(('Sua empresa tem obras em andamento?'), 0) != 0:
         wip = works_in_progress(data['lead']['custom_fields']['Sua empresa tem obras em andamento?'])
+    dict.update(normalized_data, wip=wip)
     source_first_conv = source_of_first_convertion(data['lead']['first_conversion']['conversion_origin']['source'])
+    dict.update(normalized_data, source_first_conv=source_first_conv)
     source_last_conv = source_of_last_convertion(data['lead']['last_conversion']['conversion_origin']['source'])
+    dict.update(normalized_data, source_last_conv=source_last_conv)
     concern = 0
     if data['lead']['custom_fields'].get(('Qual sua maior preocupação hoje?'), 0) != 0:
         concern = biggest_concern(data['lead']['custom_fields']['Qual sua maior preocupação hoje?'])
+    dict.update(normalized_data, concern=concern)
     looking_for_a_software = 0
     if data['lead']['custom_fields'].get(('Estou a procura de um software de gestão para minha empresa!'), 0) != 0:
         looking_for_a_software = looking_for_a_management_software(data['lead']['last_conversion']['content']['Estou a procura de um software de gestão para minha empresa!'])
-    main_activity = None
+    dict.update(normalized_data, looking_for_a_software=looking_for_a_software)
     if data['lead'].get('main_activity_code') != None:
         main_activity = cnae(data['lead'].get('main_activity_code'))
-
-    if main_activity != None:
-        normalized_data = (role, profile, conversion, lead_area, number_of_employees, company_segment, wip, source_first_conv, source_last_conv, concern, looking_for_a_software, main_activity)
-    else:
-        normalized_data = (role, profile, conversion, lead_area, number_of_employees, company_segment, wip, source_first_conv, source_last_conv, concern, looking_for_a_software)
+        dict.update(normalized_data, main_activity=main_activity)
     return normalized_data
 
 
