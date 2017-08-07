@@ -183,7 +183,41 @@ Missing Values?: No<br>
 -- 0 = no<br>
 -- 1 = yes<br>
 -- 9 = unknow<br>
-15. Lead status (class attribute)<br>
+15. Cnae (numerical)<br>
+-- 0 = unknow<br>
+-- 1 = 43.99-1-99 - Serviços especializados para construção não especificados anteriormente<br>
+-- 2 = 74.90-1-99 - Outras atividades profissionais, cientificas e técnicas não especificadas anteriormente<br>
+-- 3 = 43.30-4-01 - Impermeabilização em obras de engenharia civil<br>
+-- 4 = 42.13-8-00 - Obras de urbanização - ruas, praças e calçadas<br>
+-- 5 = 69.20-6-01 - Atividades de contabilidade<br>
+-- 6 = 82.19-9-99 - Preparação de Documentos e Serviços Especializados de Apoio Administrativo Não Especificados Anteriormente<br>
+-- 7 = 68.21-8-01 - Corretagem na compra e venda e avaliação de imóveis<br>
+-- 8 = 42.21-9-02 - Construção de estações e redes de distribuição de energia elétrica<br>
+-- 9 = 68.22-6-00 - Gestão e administração da propriedade imobiliária<br>
+-- 10 = 68.10-2-02 - Aluguel de imóveis próprios<br>
+-- 11 = 42.92-8-02 - Obras de montagem industrial<br>
+-- 12 = 71.19-7-03 - Serviços de desenho técnico relacionados à arquitetura e engenharia<br>
+-- 13 = 43.30-4-04 - Serviços de pintura de edifícios em geral<br>
+-- 14 = 42.22-7-01 - Construção de redes de abastecimento de água, coleta de esgoto e construções<br>
+-- 15 = 42.99-5-01 - Construção de instalações esportivas e recreativas<br>
+-- 16 = 23.30-3-01 - Fabricação de estruturas pré-moldadas de concreto armado, em série e sob encomenda<br>
+-- 17 = 42.21-9-03 - Manutenção de redes de distribuição de energia elétrica<br>
+-- 18 = 25.11-0-00 - Fabricação de estruturas metálicas<br>
+-- 19 = 68.10-2-03 - Loteamento de imóveis próprios<br>
+-- 20 = 43.13-4-00 - Obras de terraplenagem<br>
+-- 21 = 68.10-2-01 - Compra e venda de imóveis próprios<br>
+-- 22 = 43.21-5-00 - Instalação e manutenção elétrica<br>
+-- 23 = 43.30-4-99 - Outras obras de acabamento da construção<br>
+-- 24 = 71.11-1-00 - Serviços de Arquitetura<br>
+-- 25 = 42.99-5-99 - Outras obras de engenharia civil não especificadas anteriormente<br>
+-- 26 = 43.99-1-01 - Administração de obras<br>
+-- 27 = 43.99-1-03 - Obras de alvenaria<br>
+-- 28 = 42.11-1-01 - Construção de rodovias e ferrovias<br>
+-- 29 = 71.12-0-00 - Serviços de engenharia<br>
+-- 30 = 41.10-7-00 - Incorporação de empreendimentos imobiliários<br>
+-- 31 = 41.20-4-00 - Construção de edifícios<br>
+-- 999 = others<br>
+16. Lead status (class attribute)<br>
 -- 1 = the lead bought the system<br>
 -- 0 = the lead did not buy system<br>
 <h3>Use Cases</h3>

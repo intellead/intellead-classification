@@ -33,7 +33,6 @@ def get_data_from_lead(lead_id):
     url = 'https://intellead-data.herokuapp.com/lead-info';
     data = {"lead_id": str(lead_id)}
     response = requests.post(url, data=json.dumps(data), json={'lead_id': str(lead_id)}, headers=headers)
-    print(response.status_code)
     if response.status_code == 200:
         return response.json()
     else:

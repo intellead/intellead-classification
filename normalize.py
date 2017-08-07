@@ -21,6 +21,7 @@ def lead(data):
     main_activity = None
     if data['lead'].get('main_activity_code') != None:
         main_activity = cnae(data['lead'].get('main_activity_code'))
+
     if main_activity != None:
         normalized_data = (role, profile, conversion, lead_area, number_of_employees, company_segment, wip, source_first_conv, source_last_conv, concern, looking_for_a_software, main_activity)
     else:
@@ -204,7 +205,6 @@ def source_of_first_convertion(data):
 
 
 def source_of_last_convertion(data):
-    print(data)
     if (data is None) | (data == '') | (data == 'Desconhecido') | (data == 'unknown'):
         return 0
     elif (data.find('Orgânica') != -1) | (data == 'Google') | (data == 'google'):

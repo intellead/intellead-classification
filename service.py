@@ -33,25 +33,6 @@ def classification(data_from_lead):
     return lead_status
 
 
-def get_dataset_from_database():
-    rows = [];
-    try:
-        print('Connecting to the PostgreSQL database...')
-        conn = get_connection()
-        cur = conn.cursor()
-        cur.execute('SELECT * FROM dataset')
-        rows = cur.fetchall()
-        print("The number of rows: ", cur.rowcount)
-        cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
-            return rows
-
-
 def get_dataset_input_from_database(number_of_fields):
     rows = [];
     try:
