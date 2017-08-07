@@ -53,7 +53,7 @@ def job_title(data):
         return 6
     elif data == 'Autônomo':
         return 7
-    elif data == 'Consultor':
+    elif (data == 'Consultor') | (data == 'consultor'):
         return 8
     elif data == 'Coordenador de obras':
         return 9
