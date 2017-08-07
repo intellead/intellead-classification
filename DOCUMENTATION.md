@@ -70,7 +70,7 @@ This dataset contains leads from construction industry.<br>
 Data Set Characteristics: Multivariate<br>
 Number of Instances: 595<br>
 Attribute Characteristics: Integer<br>
-Number of Attributes: 15<br>
+Number of Attributes: 16<br>
 Associated Tasks: Classification<br>
 Missing Values?: No<br>
 <h4>Attribute information</h4>
