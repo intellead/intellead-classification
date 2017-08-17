@@ -18,7 +18,8 @@ def classification(lead):
     classifiers = [
         ('ab', AdaBoostClassifier()),
         ('dt', DecisionTreeClassifier(max_depth=5)),
-        ('gp', GaussianProcessClassifier(1.0 * RBF(1.0), warm_start=True))
+        ('kn', KNeighborsClassifier(16)),
+        #('gp', GaussianProcessClassifier(1.0 * RBF(1.0), warm_start=True))
     ]
     inputs = get_dataset_input_from_database(lead.keys())
     outputs = get_dataset_output_from_database()
