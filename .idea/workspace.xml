@@ -34,13 +34,13 @@
       <file leaf-file-name="service.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/service.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="33" column="19" lean-forward="false" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="19" />
+            <state relative-caret-position="146">
+              <caret line="29" column="71" lean-forward="false" selection-start-line="29" selection-start-column="66" selection-end-line="29" selection-end-column="71" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
-                <marker date="1502927957000" expanded="true" signature="2568:2772" ph="SELECT job_t... dataset" />
-                <marker date="1502927957000" expanded="true" signature="2814:3012" ph="SELECT * FRO... dataset" />
-                <marker date="1502927957000" expanded="true" signature="3391:3422" ph="SELECT * FRO... dataset" />
+                <marker date="1502933689000" expanded="true" signature="2578:2782" ph="SELECT job_t... dataset" />
+                <marker date="1502933689000" expanded="true" signature="2824:3022" ph="SELECT * FRO... dataset" />
+                <marker date="1502933689000" expanded="true" signature="3401:3432" ph="SELECT * FRO... dataset" />
               </folding>
             </state>
           </provider>
@@ -87,6 +87,7 @@
       <find>print</find>
       <find>get_dataset_from_database</find>
       <find>service</find>
+      <find>ravel</find>
     </findStrings>
     <replaceStrings>
       <replace>'null'</replace>
@@ -543,9 +544,9 @@
           <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1502927957000" expanded="true" signature="2568:2772" ph="SELECT job_t... dataset" />
-            <marker date="1502927957000" expanded="true" signature="2814:3012" ph="SELECT * FRO... dataset" />
-            <marker date="1502927957000" expanded="true" signature="3391:3422" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2578:2782" ph="SELECT job_t... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2824:3022" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="3401:3432" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -566,9 +567,9 @@
           <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="28" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1502927957000" expanded="true" signature="2568:2772" ph="SELECT job_t... dataset" />
-            <marker date="1502927957000" expanded="true" signature="2814:3012" ph="SELECT * FRO... dataset" />
-            <marker date="1502927957000" expanded="true" signature="3391:3422" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2578:2782" ph="SELECT job_t... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2824:3022" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="3401:3432" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -625,9 +626,9 @@
           <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="28" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1502927957000" expanded="true" signature="2568:2772" ph="SELECT job_t... dataset" />
-            <marker date="1502927957000" expanded="true" signature="2814:3012" ph="SELECT * FRO... dataset" />
-            <marker date="1502927957000" expanded="true" signature="3391:3422" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2578:2782" ph="SELECT job_t... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2824:3022" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="3401:3432" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -684,9 +685,9 @@
           <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="17" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1502927957000" expanded="true" signature="2568:2772" ph="SELECT job_t... dataset" />
-            <marker date="1502927957000" expanded="true" signature="2814:3012" ph="SELECT * FRO... dataset" />
-            <marker date="1502927957000" expanded="true" signature="3391:3422" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2578:2782" ph="SELECT job_t... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2824:3022" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="3401:3432" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -716,9 +717,9 @@
           <caret line="31" column="4" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1502927957000" expanded="true" signature="2568:2772" ph="SELECT job_t... dataset" />
-            <marker date="1502927957000" expanded="true" signature="2814:3012" ph="SELECT * FRO... dataset" />
-            <marker date="1502927957000" expanded="true" signature="3391:3422" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2578:2782" ph="SELECT job_t... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2824:3022" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="3401:3432" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -740,9 +741,9 @@
           <caret line="31" column="4" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1502927957000" expanded="true" signature="2568:2772" ph="SELECT job_t... dataset" />
-            <marker date="1502927957000" expanded="true" signature="2814:3012" ph="SELECT * FRO... dataset" />
-            <marker date="1502927957000" expanded="true" signature="3391:3422" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2578:2782" ph="SELECT job_t... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2824:3022" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="3401:3432" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
@@ -847,13 +848,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/service.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="33" column="19" lean-forward="false" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="19" />
+        <state relative-caret-position="146">
+          <caret line="29" column="71" lean-forward="false" selection-start-line="29" selection-start-column="66" selection-end-line="29" selection-end-column="71" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-            <marker date="1502927957000" expanded="true" signature="2568:2772" ph="SELECT job_t... dataset" />
-            <marker date="1502927957000" expanded="true" signature="2814:3012" ph="SELECT * FRO... dataset" />
-            <marker date="1502927957000" expanded="true" signature="3391:3422" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2578:2782" ph="SELECT job_t... dataset" />
+            <marker date="1502933689000" expanded="true" signature="2824:3022" ph="SELECT * FRO... dataset" />
+            <marker date="1502933689000" expanded="true" signature="3401:3432" ph="SELECT * FRO... dataset" />
           </folding>
         </state>
       </provider>
