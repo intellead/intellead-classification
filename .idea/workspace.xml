@@ -34,7 +34,7 @@
       <file leaf-file-name="service.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/service.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
+            <state relative-caret-position="218">
               <caret line="33" column="19" lean-forward="false" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="19" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
@@ -827,6 +827,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/normalize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="25" column="19" lean-forward="true" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -837,17 +845,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/normalize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="25" column="19" lean-forward="true" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
+        <state relative-caret-position="218">
           <caret line="33" column="19" lean-forward="false" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="19" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />

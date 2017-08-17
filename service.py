@@ -27,7 +27,7 @@ def classification(lead):
     print('The number of examples used for training are: %d' % (len(inputs_training)))
     print('The number of examples used for testing are: %d' % (len(inputs_test)))
     voting_classifier = VotingClassifier(estimators=classifiers, voting='hard')
-    voting_classifier = voting_classifier.fit(inputs_training, outputs_training)
+    voting_classifier = voting_classifier.fit(inputs_training, np.ravel(outputs_training))
     print('The probability of the machine to be right is: %f%%' % (voting_classifier.score(inputs_test, outputs_test) * 100))
     print('Lead data:')
     print(lead)
