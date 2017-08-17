@@ -49,6 +49,7 @@ def save_lead_status(lead_id, lead_status):
     data = {"lead_id": str(lead_id), "lead_status": int(lead_status)}
     requests.post(url, data=json.dumps(data), json={'lead_id': str(lead_id)}, headers=headers)
 
+
 if __name__ == '__main__':
     app.run(debug=True)
 
