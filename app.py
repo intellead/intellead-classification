@@ -61,8 +61,8 @@ def send_data_to_connector(lead):
     }
     url = 'http://intellead-connector.herokuapp.com/rd-webhook';
     data = {"leads": lead}
-    response = requests.post(url, data=json.dumps(data), json={'leads': lead}, headers=headers)
-    print(response)
+    requests.post(url, data=json.dumps(data), json={'leads': lead}, headers=headers)
+    print('sended to connector')
 
 
 if __name__ == '__main__':
