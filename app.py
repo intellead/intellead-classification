@@ -59,8 +59,7 @@ def send_data_to_connector(json_lead):
     leads = {[json_lead]}
     print('connecting... to intellead-connector')
     headers = {
-        'content-type': 'application/x-www-form-urlencoded',
-        'cache-control': 'no-cache'
+        'content-type': 'application/json'
     }
     url = 'https://intellead-connector.herokuapp.com/rd-webhook'
     body = json.dumps({"leads": leads})
