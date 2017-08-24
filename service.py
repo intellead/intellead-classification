@@ -37,7 +37,7 @@ def classification(lead):
     lead_status = voting_classifier.predict(data_to_predict)
     print('According to lead data, his status is: %d' % (lead_status))
     print('[0] unqualified [1] qualified')
-    return lead_status
+    return lead_status[0]
 
 
 def convert_dict_to_tuple(data):
