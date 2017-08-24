@@ -63,8 +63,9 @@ def send_data_to_connector(json_lead):
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
     }
     url = 'http://intellead-connector.herokuapp.com/rd-webhook'
-    data = {"leads": json_lead}
-    requests.post(url, data=json.dumps(data), json={'leads': json_lead}, headers=headers)
+    body = json.dumps({"leads": json_lead})
+    r = requests.post(url, data=body, json={'leads': json_lead}, headers=headers)
+    print(r.status_code)
     print('lead has been sended to intellead-connector')
 
 
