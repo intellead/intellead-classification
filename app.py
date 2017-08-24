@@ -48,7 +48,7 @@ def save_lead_status(lead_id, lead_status):
         'cache-control': 'no-cache',
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
     }
-    url = 'https://intellead-data.herokuapp.com/save-lead-status';
+    url = 'https://intellead-data.herokuapp.com/save-lead-status'
     data = {"lead_id": str(lead_id), "lead_status": int(lead_status)}
     requests.post(url, data=json.dumps(data), json={'lead_id': str(lead_id)}, headers=headers)
 
@@ -59,7 +59,7 @@ def send_data_to_connector(lead):
         'cache-control': 'no-cache',
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
     }
-    url = 'http://intellead-connector.herokuapp.com/rd-webhook';
+    url = 'http://intellead-connector.herokuapp.com/rd-webhook'
     data = {"leads": lead}
     requests.post(url, data=json.dumps(data), json={'leads': lead}, headers=headers)
     print('sended to connector')
