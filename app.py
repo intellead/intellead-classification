@@ -56,14 +56,15 @@ def save_lead_status(lead_id, lead_status):
 
 
 def send_data_to_connector(json_lead):
+    leads = {[json_lead]}
     print('connecting... to intellead-connector')
     headers = {
         'content-type': 'application/x-www-form-urlencoded',
         'cache-control': 'no-cache'
     }
     url = 'https://intellead-connector.herokuapp.com/rd-webhook'
-    body = json.dumps({"leads": json_lead})
-    r = requests.post(url, data=body, json={'leads': json_lead}, headers=headers)
+    body = json.dumps({"leads": leads})
+    r = requests.post(url, data=body, json={'leads': leads}, headers=headers)
     print(r.status_code)
     print('lead has been sended to intellead-connector')
 
