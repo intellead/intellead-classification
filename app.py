@@ -23,13 +23,7 @@ def get_lead_status_by_id(lead_id):
     lead_status = service.classification(normalized_data)
     save_lead_status(lead_id, lead_status)
     if lead_status == 1:
-        print('A')
-        print(type(json_lead))
-        print('B')
         json_lead['lead']['lead_status'] = int(lead_status)
-        print(type(json.dumps(json_lead)))
-        print('C')
-
         send_data_to_connector(json_lead['lead'])
         print('connected')
     return str(lead_status)
@@ -63,12 +57,9 @@ def save_lead_status(lead_id, lead_status):
 
 
 def send_data_to_connector(data):
-    print(type(data))
-    print(data['email'] + ' connecting... to intellead-connector')
+    print(data['email'] + ' was sended to intellead-connector. connecting... ')
     leads = {}
     leads['leads'] = [data]
-    #print(leads)
-    #print(type(leads))
     url = 'https://intellead-connector.herokuapp.com/teste'
     r = requests.post(url, json=leads)
     print(r.status_code)
