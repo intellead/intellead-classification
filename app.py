@@ -58,7 +58,12 @@ def save_lead_status(lead_id, lead_status):
 
 def send_data_to_connector(json_lead):
     print(json_lead['email'] + ' connecting... to intellead-connector')
-    leads = '{"leads": {[' + json_lead + ']}}'
+    leads = {}
+    print('LEADS VAZIO')
+    print(leads)
+    leads['leads'] = json_lead
+    print('LEADS PREENCHIDO')
+    print(leads)
     #{'leads': {[json_lead['lead']]}}
     headers = {
         'content-type': 'application/json'
