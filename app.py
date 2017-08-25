@@ -60,13 +60,13 @@ def send_data_to_connector(json_lead):
     print(json_lead['email'] + ' connecting... to intellead-connector')
     leads = json_lead
     #{'leads': {[json_lead['lead']]}}
-    print(leads)
     headers = {
         'content-type': 'application/json'
     }
-    url = 'https://intellead-connector.herokuapp.com/teste'
+    #, headers=headers
     #body = json.dumps({"leads": leads})
-    r = requests.post(url, headers=headers)
+    url = 'https://intellead-connector.herokuapp.com/teste'
+    r = requests.post(url)
     print('HERE!!!')
     print(json_lead['email'] + ' lead has been sended to intellead-connector and return the status: ' + r.status_code)
 
