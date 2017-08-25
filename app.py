@@ -68,10 +68,7 @@ def send_data_to_connector(json_lead):
     #body = json.dumps({"leads": leads})
     r = requests.post(url, data=json.dumps({"leads": leads}), json={'leads': leads}, headers=headers)
     print('HERE!!!')
-    print(r)
-    print('THERE!!!')
-    print(r.status_code)
-    print(json_lead['email'] + ' lead has been sended to intellead-connector')
+    print(json_lead['email'] + ' lead has been sended to intellead-connector and return the status: ' + r.status_code)
 
 
 if __name__ == '__main__':
