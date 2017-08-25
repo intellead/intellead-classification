@@ -23,15 +23,10 @@ def get_lead_status_by_id(lead_id):
     lead_status = service.classification(normalized_data)
     save_lead_status(lead_id, lead_status)
     if lead_status == 1:
-        print('1')
-        teste = json.loads(json_lead)
-        print('2')
-        teste['lead']['lead_status'] = lead_status
-        print('3')
-        print(type(json.dumps(teste)))
         print('A')
         print(type(json_lead))
         print('B')
+        json_lead['lead']['lead_status'] = int(lead_status)
         print(type(json.dumps(json_lead)))
         print('C')
 
