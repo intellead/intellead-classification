@@ -8,6 +8,14 @@ import service
 
 app = Flask(__name__)
 
+test_data = {
+   'leads': [{
+   'name': 'ACME',
+   'shares': 100,
+   'price': 542.23
+   }]
+}
+
 
 @app.route('/')
 def index():
@@ -61,10 +69,8 @@ def send_data_to_connector(data):
     leads = {}
     leads['leads'] = [data]
     print(leads)
-    json_str = json.loads(leads)
-    print(json_str)
     url = 'https://intellead-connector.herokuapp.com/teste'
-    r = requests.post(url, json=json_str)
+    r = requests.post(url, json=test_data)
     print(r.status_code)
 
 
