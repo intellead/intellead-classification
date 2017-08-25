@@ -22,7 +22,7 @@ def get_lead_status_by_id(lead_id):
     print('A')
     print(type(json_lead))
     print('B')
-    print(json.dumps(json_lead))
+    print(type(json.dumps(json_lead)))
     print('C')
     normalized_data = normalize.lead(json_lead)
     lead_status = service.classification(normalized_data)
