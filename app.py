@@ -66,7 +66,10 @@ def send_data_to_connector(json_lead):
     }
     url = 'https://intellead-connector.herokuapp.com/teste'
     #body = json.dumps({"leads": leads})
-    r = requests.post(url, data=leads, json={'leads': leads}, headers=headers)
+    r = requests.post(url, data=json.dumps({"leads": leads}), json={'leads': leads}, headers=headers)
+    print('HERE!!!')
+    print(r)
+    print('THERE!!!')
     print(r.status_code)
     print(json_lead['email'] + ' lead has been sended to intellead-connector')
 
