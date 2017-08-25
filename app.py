@@ -65,7 +65,8 @@ def send_data_to_connector(data):
     print(leads)
     print(type(leads))
     url = 'https://intellead-connector.herokuapp.com/teste'
-    r = requests.post(url, json=teste_a)
+    r = requests.post(url, json=str(leads))
+    #r = requests.post(url, json=teste_a)
     print(r.status_code)
 
 
