@@ -8,13 +8,6 @@ import service
 
 app = Flask(__name__)
 
-test_data = {
-   'leads': [{
-   'name': 'ACME',
-   'shares': 100,
-   'price': 542.23
-   }]
-}
 
 test_2 = {
 	'leads': [{
@@ -255,12 +248,10 @@ def send_data_to_connector(data):
     leads = {}
     leads['leads'] = [data]
     print(leads)
-    test_data_str = json.dumps(test_data)
-    print(test_data_str)
-    print(type(test_data))
-    print(type(test_data_str))
+    print(test_2)
+    print(type(leads))
+    print(type(test_2))
     url = 'https://intellead-connector.herokuapp.com/teste'
-    #r = requests.post(url, json=test_data)
     r = requests.post(url, json=test_2)
     print(r.status_code)
 
