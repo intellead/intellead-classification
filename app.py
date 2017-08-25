@@ -67,7 +67,8 @@ def send_data_to_connector(json_lead):
         'Cache-Control': 'no-cache'
     }
     url = 'https://intellead-connector.herokuapp.com/teste'
-    r = requests.post(url, data=leads, json=leads, headers=headers)
+    #data=leads
+    r = requests.post(url, json=leads)
     print(r.status_code)
 
 
