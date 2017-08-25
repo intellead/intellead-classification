@@ -61,13 +61,14 @@ def send_data_to_connector(json_lead):
     leads = {}
     leads['leads'] = [json_lead]
     print(leads)
-    print(type(json_lead))
-    print(type(leads))
-    dum = json.dumps(leads)
-    print('XTZ')
-    print(type(dum))
+    #dum = json.dumps(leads)
+    headers = {
+        'content-type': 'application/json',
+        'cache-control': 'no-cache',
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
+    }
     url = 'https://intellead-connector.herokuapp.com/teste'
-    r = requests.post(url, data=leads)
+    r = requests.post(url, data=leads, headers=headers)
     print(r.status_code)
 
 
