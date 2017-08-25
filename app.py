@@ -24,7 +24,7 @@ def get_lead_status_by_id(lead_id):
     save_lead_status(lead_id, lead_status)
     if lead_status == 1:
         json_lead['lead']['lead_status'] = lead_status
-        send_data_to_connector(json_lead)
+        send_data_to_connector(json_lead['lead'])
         print('connected')
     return str(lead_status)
 
@@ -57,7 +57,7 @@ def save_lead_status(lead_id, lead_status):
 
 
 def send_data_to_connector(json_lead):
-    print(json_lead['lead']['email'] + ' connecting... to intellead-connector')
+    print(json_lead['email'] + ' connecting... to intellead-connector')
     leads = json_lead
     #{'leads': {[json_lead['lead']]}}
     print(leads)
@@ -68,7 +68,7 @@ def send_data_to_connector(json_lead):
     body = json.dumps({"leads": leads})
     r = requests.post(url, data=body, json={'leads': leads}, headers=headers)
     print(r.status_code)
-    print(json_lead['lead']['email'] + ' lead has been sended to intellead-connector')
+    print(json_lead['email'] + ' lead has been sended to intellead-connector')
 
 
 if __name__ == '__main__':
