@@ -73,6 +73,19 @@ def send_data_to_connector(data):
     print(test_data_str)
     print(type(test_data))
     print(type(test_data_str))
+
+    try:
+        json_object_leads = json.dumps(leads)
+        print('Dumps leads JSON has success')
+    except ValueError:
+        print('Dumps leads JSON has failed')
+
+    try:
+        json_object_data = json.dumps(data)
+        print('Dumps data JSON has success')
+    except ValueError:
+        print('Dumps data JSON has failed')
+
     url = 'https://intellead-connector.herokuapp.com/teste'
     r = requests.post(url, json=test_data)
     print(r.status_code)
