@@ -19,16 +19,18 @@ def get_lead_status_by_id(lead_id):
     json_lead = get_data_from_lead(lead_id)
     if (json_lead is None) | (json_lead == ''):
         abort(404)
-    print('A')
-    print(type(json_lead))
-    print('B')
-    print(type(json.dumps(json_lead)))
-    print('C')
     normalized_data = normalize.lead(json_lead)
     lead_status = service.classification(normalized_data)
     save_lead_status(lead_id, lead_status)
     if lead_status == 1:
         json_lead['lead']['lead_status'] = lead_status
+
+        print('A')
+        print(type(json_lead))
+        print('B')
+        print(type(json.dumps(json_lead)))
+        print('C')
+
         send_data_to_connector(json_lead['lead'])
         print('connected')
     return str(lead_status)
