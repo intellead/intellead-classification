@@ -16,6 +16,21 @@ test_data = {
    }]
 }
 
+test_2 = {
+    'leads': [{
+        'email': 'andreza.geovana@hotmail.com',
+        'name': 'Andreza',
+        'company': 'Elitim',
+        'job_title': 'Assistente',
+        'bio': None,
+        'public_url': 'http://rdstation.com.br/leads/public/5a0aa3fe-9fda-461e-ab75-1350c31fb4c4',
+        'created_at': '2010-01-01T00:00:00.000-02:00',
+        'opportunity': 'false',
+        'number_conversions': '38',
+        'lead_status': 1
+    }]
+}
+
 
 @app.route('/')
 def index():
@@ -75,7 +90,7 @@ def send_data_to_connector(data):
     print(type(test_data_str))
     url = 'https://intellead-connector.herokuapp.com/teste'
     #r = requests.post(url, json=test_data)
-    r = requests.post(url, data=leads)
+    r = requests.post(url, json=test_2)
     print(r.status_code)
 
 
