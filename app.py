@@ -34,7 +34,7 @@ def get_data_from_lead(lead_id):
         'cache-control': 'no-cache',
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
     }
-    url = 'https://intellead-data.herokuapp.com/lead-info';
+    url = 'https://intellead-data.herokuapp.com/lead-info'
     data = {"lead_id": str(lead_id)}
     response = requests.post(url, data=json.dumps(data), json={'lead_id': str(lead_id)}, headers=headers)
     if response.status_code == 200:
@@ -56,8 +56,8 @@ def save_lead_status(lead_id, lead_status):
 
 
 def send_data_to_connector(json_lead):
+    print(json_lead['lead']['job_title'] + 'connecting... to intellead-connector')
     leads = {'leads': {[json_lead['lead']]}}
-    print('connecting... to intellead-connector')
     print(leads)
     headers = {
         'content-type': 'application/json'
@@ -66,7 +66,7 @@ def send_data_to_connector(json_lead):
     body = json.dumps({"leads": leads})
     r = requests.post(url, data=body, json={'leads': leads}, headers=headers)
     print(r.status_code)
-    print('lead has been sended to intellead-connector')
+    print(json_lead['lead']['job_title'] + ' lead has been sended to intellead-connector')
 
 
 if __name__ == '__main__':
