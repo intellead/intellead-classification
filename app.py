@@ -61,7 +61,7 @@ def send_data_to_connector(json_lead):
     headers = {
         'content-type': 'application/json'
     }
-    url = 'https://intellead-connector.herokuapp.com/rd-webhook'
+    url = 'https://intellead-connector.herokuapp.com/teste'
     body = json.dumps({"leads": leads})
     r = requests.post(url, data=body, json={'leads': leads}, headers=headers)
     print(r.status_code)
