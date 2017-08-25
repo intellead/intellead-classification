@@ -56,18 +56,12 @@ def save_lead_status(lead_id, lead_status):
     print('lead has been sended to intellead-data')
 
 
-def send_data_to_connector(json_lead):
-    print(json_lead['email'] + ' connecting... to intellead-connector')
+def send_data_to_connector(data):
+    print(data['email'] + ' connecting... to intellead-connector')
     leads = {}
-    leads['leads'] = [json_lead]
+    leads['leads'] = [data]
     print(leads)
-    #dum = json.dumps(leads)
-    headers = {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache'
-    }
     url = 'https://intellead-connector.herokuapp.com/teste'
-    #data=leads
     r = requests.post(url, json=leads)
     print(r.status_code)
 
