@@ -63,9 +63,8 @@ def send_data_to_connector(json_lead):
     print(leads)
     #dum = json.dumps(leads)
     headers = {
-        'content-type': 'application/json',
-        'cache-control': 'no-cache',
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache'
     }
     url = 'https://intellead-connector.herokuapp.com/teste'
     r = requests.post(url, data=leads, headers=headers)
