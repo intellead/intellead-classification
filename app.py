@@ -165,6 +165,32 @@ teste_a = {
 		'company_situation': 'ATIVA',
 		'company_social_capital': '500000.00',
 		'company_telephone': '(48) 3348-0406',
+		'enrichByQcnpjCrawler': True,
+		'company_type': 'MATRIZ',
+		'company_opening_date': '01/07/2011',
+		'company_name': 'ELITIM CONSTRUCAO E INCORPORACAO LTDA',
+		'company_fantasy_name': 'ELITIM CONSTRUTORA E ELITIM CONSTRUTORA E INCORPORADORA',
+		'company_uf': 'SC',
+		'company_neighborhood': 'ESTREITO',
+		'company_street': 'R SOUZA DUTRA',
+		'company_adress_number': '145',
+		'company_zip_code': '88.070-605',
+		'company_city': 'FLORIANOPOLIS',
+		'company_board_members': [{
+			'qual': '05-Administrador',
+			'nome': 'LUIZ FELIPE VIEIRA SCHMIDT'
+		}, {
+			'qual': '22-Sócio',
+			'qual_rep_legal': '05-Administrador',
+			'nome_rep_legal': 'LUIZ FELIPE VIEIRA SCHMIDT',
+			'nome': 'BRACO INVESTIMENTOS E PARTICIPACOES LTDA'
+		}, {
+			'qual': '05-Administrador',
+			'nome': 'THIERRY JULES CHATELAN'
+		}, {
+			'qual': '49-Sócio-Administrador',
+			'nome': 'CARLOS ALBERTO PRUDENCIO DE SOUZA'
+		}],
 		'lead_status': 1
 	}]
 }
