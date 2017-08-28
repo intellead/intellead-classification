@@ -60,7 +60,7 @@ def send_data_to_connector(data):
     print(data['email'] + ' was sended to intellead-connector. connecting... ')
     leads = {}
     leads['leads'] = [data]
-    url = 'https://intellead-connector.herokuapp.com/teste'
+    url = 'https://intellead-connector.herokuapp.com/rd-webhook'
     r = requests.post(url, json=leads)
     print(r.status_code)
 
