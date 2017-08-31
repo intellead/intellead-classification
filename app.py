@@ -22,10 +22,10 @@ def get_lead_status_by_id(lead_id):
     normalized_data = normalize.lead(json_lead)
     lead_status = service.classification(normalized_data)
     save_lead_status(lead_id, lead_status)
-    if lead_status == 1:
-        json_lead['lead']['lead_status'] = int(lead_status)
-        #send_data_to_connector(json_lead['lead'])
-        print('connected')
+    #if lead_status == 1:
+        # json_lead['lead']['lead_status'] = int(lead_status)
+        # send_data_to_connector(json_lead['lead'])
+    send_data_to_connector(json_lead['lead'], int(lead_status))
     return str(lead_status)
 
 
@@ -53,17 +53,16 @@ def save_lead_status(lead_id, lead_status):
     url = 'https://intellead-data.herokuapp.com/save-lead-status'
     data = {"lead_id": str(lead_id), "lead_status": int(lead_status)}
     requests.post(url, data=json.dumps(data), json={'lead_id': str(lead_id)}, headers=headers)
-    print('lead has been sended to intellead-data')
+    print('The lead was sent to intellead-data')
 
 
-def send_data_to_connector(data):
-    print(data['email'] + ' was sended to intellead-connector. connecting... ')
+def send_data_to_connector(data, lead_status):
+    data['lead_status'] = int(lead_status)
     leads = {}
     leads['leads'] = [data]
-    url = 'https://intellead-connector.herokuapp.com/rd-webhook'
+    url = 'https://intellead-connector.herokuapp.com/intellead-webhook'
     r = requests.post(url, json=leads)
-    print(r.status_code)
-
+    print('The lead ' + data['email'] + ' was sent to intellead-connector with status code: ' + r.status_code)
 
 
 if __name__ == '__main__':
