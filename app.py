@@ -22,10 +22,7 @@ def get_lead_status_by_id(lead_id):
     normalized_data = normalize.lead(json_lead)
     lead_status = service.classification(normalized_data)
     save_lead_status(lead_id, lead_status)
-    #if lead_status == 1:
-        # json_lead['lead']['lead_status'] = int(lead_status)
-        # send_data_to_connector(json_lead['lead'])
-    send_data_to_connector(json_lead['lead'], int(lead_status))
+    #send_data_to_connector(json_lead['lead'], int(lead_status))
     return str(lead_status)
 
 
