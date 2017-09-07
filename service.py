@@ -13,26 +13,30 @@ s3 = S3Connection(os.environ['DATABASE_NAME'], os.environ['DATABASE_USER'], os.e
 
 
 def classification(lead):
-    classifiers = [
-        ('ab', AdaBoostClassifier()),
-        ('dt', DecisionTreeClassifier(max_depth=5)),
-        ('kn', KNeighborsClassifier(16)),
-    ]
+    #classifiers = [
+    #    ('ab', AdaBoostClassifier()),
+    #    ('dt', DecisionTreeClassifier(max_depth=5)),
+    #    ('kn', KNeighborsClassifier(16)),
+    #]
     inputs = get_dataset_input_from_database(lead.keys())
     outputs = get_dataset_output_from_database()
     print('The total number of examples in the dataset is: %d' % (len(inputs)))
     inputs_training, inputs_test, outputs_training, outputs_test = train_test_split(inputs, outputs, test_size=0.3, random_state=42)
     print('The number of examples used for training are: %d' % (len(inputs_training)))
     print('The number of examples used for testing are: %d' % (len(inputs_test)))
-    voting_classifier = VotingClassifier(estimators=classifiers, voting='hard')
-    voting_classifier = voting_classifier.fit(inputs_training, np.ravel(outputs_training))
-    print('The probability of the machine to be right is: %f%%' % (voting_classifier.score(inputs_test, outputs_test) * 100))
+    knn = KNeighborsClassifier(n_neighbors=9, p=2)
+    knn.fit(inputs_training, np.ravel(outputs_training))
+    print('[K=9] The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
+    #voting_classifier = VotingClassifier(estimators=classifiers, voting='hard')
+    #voting_classifier = voting_classifier.fit(inputs_training, np.ravel(outputs_training))
+    #print('The probability of the machine to be right is: %f%%' % (voting_classifier.score(inputs_test, outputs_test) * 100))
     print('Lead data:')
     print(lead)
     data_to_predict = convert_dict_to_tuple(lead)
     print('Lead data to predict:')
     print(data_to_predict)
-    lead_status = voting_classifier.predict(data_to_predict)
+    lead_status = knn.predict(data_to_predict)
+    #lead_status = voting_classifier.predict(data_to_predict)
     print('According to lead data, his status is: %d' % (lead_status))
     print('[0] unqualified [1] qualified')
     return lead_status[0]
