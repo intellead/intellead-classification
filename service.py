@@ -24,7 +24,7 @@ def classification(lead):
     inputs_training, inputs_test, outputs_training, outputs_test = train_test_split(inputs, outputs, test_size=0.3, random_state=42)
     print('The number of examples used for training are: %d' % (len(inputs_training)))
     print('The number of examples used for testing are: %d' % (len(inputs_test)))
-    knn = KNeighborsClassifier(n_neighbors=9, p=2)
+    knn = KNeighborsClassifier(n_neighbors=7, p=2)
     knn.fit(inputs_training, np.ravel(outputs_training))
     print('[K=9] The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
     #voting_classifier = VotingClassifier(estimators=classifiers, voting='hard')
