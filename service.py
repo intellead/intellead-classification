@@ -7,6 +7,7 @@ import numpy as np
 import psycopg2
 import os
 from boto.s3.connection import S3Connection
+import pandas as pd
 
 
 s3 = S3Connection(os.environ['DATABASE_NAME'], os.environ['DATABASE_USER'], os.environ['DATABASE_PASSWORD'], os.environ['DATABASE_HOST'], os.environ['DATABASE_PORT'])
@@ -36,10 +37,17 @@ def classification(lead):
     print('Lead data to predict:')
     print(data_to_predict)
     lead_status = knn.predict(data_to_predict)
+    lead_status_value = lead_status[0]
     #lead_status = voting_classifier.predict(data_to_predict)
-    print('According to lead data, his status is: %d' % (lead_status))
+    print('According to lead data, his status is: %d' % (lead_status_value))
     print('[0] unqualified [1] qualified')
-    return lead_status[0]
+    proba = knn.predict_proba(data_to_predict)
+    max_proba = max(proba[0])
+    print('Proba is: %d%%' %(max_proba*100))
+    lead_status_dict = dict()
+    dict.update(lead_status_dict, value=str(lead_status_value))
+    dict.update(lead_status_dict, proba=str(max_proba))
+    return lead_status_dict
 
 
 def convert_dict_to_tuple(data):
