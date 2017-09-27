@@ -63,7 +63,10 @@ DATABASE_HOST - Host from database;<br>
 DATABASE_PORT - The port where database is connected;<br>
 DATABASE_NAME - Database name;<br>
 DATABASE_USER - User account to connect to the database;<br>
-DATABASE_PASSWORD - Password to connect to the database.
+DATABASE_PASSWORD - Password to connect to the database;<br>
+DATA_LEAD_INFO_URL - Full URL of Lead Info API from Data Service;<br>
+DATA_SAVE_LEAD_STATUS_URL - Full URL of Save Lead Status API from Data Service;<br>
+CONNECTOR_CLASSIFICATION_WEBHOOK - Full URL of Classification Webhook API from Connector Service.
 <h3>Dataset</h3>
 This dataset contains leads from construction industry.<br>
 <h4>Dataset information</h4>
