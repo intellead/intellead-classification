@@ -5,6 +5,7 @@ from flask import Flask, abort, request
 
 import normalize
 import service
+import os
 
 app = Flask(__name__)
 
@@ -32,7 +33,7 @@ def get_data_from_lead(lead_id):
         'cache-control': 'no-cache',
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
     }
-    url = 'https://intellead-data.herokuapp.com/lead-info'
+    url = os.environ['DATA_LEAD_INFO_URL']
     data = {"lead_id": str(lead_id)}
     response = requests.post(url, data=json.dumps(data), json={'lead_id': str(lead_id)}, headers=headers)
     if response.status_code == 200:
@@ -47,7 +48,7 @@ def save_lead_status(lead_id, lead_status):
         'cache-control': 'no-cache',
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
     }
-    url = 'https://intellead-data.herokuapp.com/save-lead-status'
+    url = os.environ['DATA_SAVE_LEAD_STATUS_URL']
     data = {"lead_id": str(lead_id), "lead_status": int(lead_status)}
     requests.post(url, data=json.dumps(data), json={'lead_id': str(lead_id)}, headers=headers)
     print('The lead was sent to intellead-data')
@@ -57,7 +58,7 @@ def send_data_to_connector(data, lead_status):
     data['lead_status'] = int(lead_status)
     leads = {}
     leads['leads'] = [data]
-    url = 'https://intellead-connector.herokuapp.com/intellead-webhook'
+    url = os.environ['CONNECTOR_CLASSIFICATION_WEBHOOK']
     r = requests.post(url, json=leads)
     print('The lead ' + data['email'] + ' was sent to intellead-connector with status code: ' + r.status_code)
 
