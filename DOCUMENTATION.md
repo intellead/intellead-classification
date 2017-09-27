@@ -63,7 +63,11 @@ DATABASE_HOST - Host from database;<br>
 DATABASE_PORT - The port where database is connected;<br>
 DATABASE_NAME - Database name;<br>
 DATABASE_USER - User account to connect to the database;<br>
-DATABASE_PASSWORD - Password to connect to the database;<br>
+DATABASE_PASSWORD - Password to connect to the database.<br>
+<br>
+The application uses other intellead services.<br>
+For this it is necessary to configure the URL variables.<br>
+You must config the following vars:<br>
 DATA_LEAD_INFO_URL - Full URL of Lead Info API from Data Service;<br>
 DATA_SAVE_LEAD_STATUS_URL - Full URL of Save Lead Status API from Data Service;<br>
 CONNECTOR_CLASSIFICATION_WEBHOOK - Full URL of Classification Webhook API from Connector Service.
