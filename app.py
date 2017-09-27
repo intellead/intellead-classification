@@ -24,7 +24,7 @@ def get_lead_status_by_id(lead_id):
     lead_status = service.classification(normalized_data)
     save_lead_status(lead_id, lead_status)
     #send_data_to_connector(json_lead['lead'], int(lead_status))
-    return str(lead_status)
+    return str(lead_status['value'])
 
 
 def get_data_from_lead(lead_id):
@@ -49,7 +49,8 @@ def save_lead_status(lead_id, lead_status):
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
     }
     url = os.environ['DATA_SAVE_LEAD_STATUS_URL']
-    data = {"lead_id": str(lead_id), "lead_status": int(lead_status)}
+    data = {"lead_id": str(lead_id), "lead_status": lead_status}
+    print(data)
     requests.post(url, data=json.dumps(data), json={'lead_id': str(lead_id)}, headers=headers)
     print('The lead was sent to intellead-data')
 
