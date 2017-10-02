@@ -33,7 +33,7 @@ def get_data_from_lead(lead_id):
         'cache-control': 'no-cache',
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
     }
-    url = os.environ['DATA_LEAD_INFO_URL']
+    url = os.getenv('DATA_LEAD_INFO_URL', 'http://intellead-data/lead-info')
     data = {"lead_id": str(lead_id)}
     response = requests.post(url, data=json.dumps(data), json={'lead_id': str(lead_id)}, headers=headers)
     if response.status_code == 200:
@@ -48,7 +48,7 @@ def save_lead_status(lead_id, lead_status):
         'cache-control': 'no-cache',
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
     }
-    url = os.environ['DATA_SAVE_LEAD_STATUS_URL']
+    url = os.getenv('DATA_SAVE_LEAD_STATUS_URL', 'http://intellead-data/save-lead-status')
     data = {"lead_id": str(lead_id), "lead_status": lead_status}
     print(data)
     requests.post(url, data=json.dumps(data), json={'lead_id': str(lead_id)}, headers=headers)
