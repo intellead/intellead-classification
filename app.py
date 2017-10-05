@@ -23,7 +23,7 @@ def get_lead_status_by_id(lead_id):
     normalized_data = normalize.lead(json_lead)
     lead_status = service.classification(normalized_data)
     save_lead_status(lead_id, lead_status)
-    #send_data_to_connector(json_lead['lead'], int(lead_status))
+    send_data_to_connector(json_lead['lead'], lead_status)
     return str(lead_status['value'])
 
 
@@ -56,12 +56,13 @@ def save_lead_status(lead_id, lead_status):
 
 
 def send_data_to_connector(data, lead_status):
-    data['lead_status'] = int(lead_status)
+    data['lead_status'] = lead_status['value']
+    data['lead_status_proba'] = lead_status['proba']
     leads = {}
     leads['leads'] = [data]
     url = os.environ['CONNECTOR_CLASSIFICATION_WEBHOOK']
     r = requests.post(url, json=leads)
-    print('The lead ' + data['email'] + ' was sent to intellead-connector with status code: ' + r.status_code)
+    print('The lead ' + data['email'] + ' was sent to intellead-connector with status code: ' + str(r.status_code))
 
 
 if __name__ == '__main__':
