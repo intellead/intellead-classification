@@ -1,6 +1,6 @@
 FROM python:3.6.2
 
-WORKDIR /usr/src/intellead-classification/app
+WORKDIR /usr/src/intellead/intellead-classification/app
 
 COPY requirements.txt ./
 
