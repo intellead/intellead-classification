@@ -10,7 +10,7 @@ from boto.s3.connection import S3Connection
 import pandas as pd
 
 
-s3 = S3Connection(os.environ['DATABASE_NAME'], os.environ['DATABASE_USER'], os.environ['DATABASE_PASSWORD'], os.environ['DATABASE_HOST'], os.environ['DATABASE_PORT'])
+s3 = S3Connection(os.getenv('DATABASE_NAME', 'postgres'), os.getenv('DATABASE_USER', 'postgres'), os.getenv('DATABASE_PASSWORD', 'postgres'), os.getenv('DATABASE_HOST', 'intellead-classification-postgresql'), os.getenv('DATABASE_PORT', 5432))
 
 
 def classification(lead):
@@ -94,8 +94,8 @@ def get_dataset_output_from_database():
 
 def get_connection():
     try:
-        conn = psycopg2.connect(host=os.environ.get('DATABASE_HOST'), database=os.environ.get('DATABASE_NAME'),
-                                user=os.environ.get('DATABASE_USER'), password=os.environ.get('DATABASE_PASSWORD'))
+        conn = psycopg2.connect(host=os.getenv('DATABASE_HOST', 'intellead-classification-postgresql'), database=os.getenv('DATABASE_NAME', 'postgres'),
+                                user=os.getenv('DATABASE_USER', 'postgres'), password=os.getenv('DATABASE_PASSWORD', 'postgres'))
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
