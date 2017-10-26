@@ -60,7 +60,7 @@ def send_data_to_connector(data, lead_status):
     data['lead_status_proba'] = lead_status['proba']
     leads = {}
     leads['leads'] = [data]
-    url = os.environ['CONNECTOR_CLASSIFICATION_WEBHOOK']
+    url = os.getenv('CONNECTOR_CLASSIFICATION_WEBHOOK', 'http://intellead-connector:3000/intellead-webhook')
     r = requests.post(url, json=leads)
     print('The lead ' + data['email'] + ' was sent to intellead-connector with status code: ' + str(r.status_code))
 
