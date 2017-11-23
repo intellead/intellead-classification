@@ -19,7 +19,6 @@
 import requests
 import json
 from flask import Flask, abort, request
-
 import normalize
 import service
 import os
@@ -34,21 +33,26 @@ def index():
 
 @app.route('/lead_status_by_id/<int:lead_id>', methods=['GET'])
 def get_lead_status_by_id(lead_id):
-    json_lead = get_data_from_lead(lead_id)
+    url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
+    token = request.headers.get('token')
+    if requests.post(url + '/' + str(token)).status_code != 200:
+        abort(403)
+    json_lead = get_data_from_lead(token, lead_id)
     if (json_lead is None) | (json_lead == ''):
         abort(404)
     normalized_data = normalize.lead(json_lead)
     lead_status = service.classification(normalized_data)
-    save_lead_status(lead_id, lead_status)
-    send_data_to_connector(json_lead['lead'], lead_status)
+    save_lead_status(token, lead_id, lead_status)
+    send_data_to_connector(token, json_lead['lead'], lead_status)
     return str(lead_status['value'])
 
 
-def get_data_from_lead(lead_id):
+def get_data_from_lead(token, lead_id):
     headers = {
         'content-type': 'application/json',
         'cache-control': 'no-cache',
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36',
+        'token': token
     }
     url = os.getenv('DATA_LEAD_INFO_URL', 'http://intellead-data:3000/lead-info')
     data = {"lead_id": str(lead_id)}
@@ -59,11 +63,12 @@ def get_data_from_lead(lead_id):
         return None
 
 
-def save_lead_status(lead_id, lead_status):
+def save_lead_status(token, lead_id, lead_status):
     headers = {
         'content-type': 'application/json',
         'cache-control': 'no-cache',
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.90 Safari/537.36',
+        'token': token
     }
     url = os.getenv('DATA_SAVE_LEAD_STATUS_URL', 'http://intellead-data:3000/save-lead-status')
     data = {"lead_id": str(lead_id), "lead_status": lead_status}
@@ -72,13 +77,16 @@ def save_lead_status(lead_id, lead_status):
     print('The lead was sent to intellead-data')
 
 
-def send_data_to_connector(data, lead_status):
+def send_data_to_connector(token, data, lead_status):
+    headers = {
+        'token': token
+    }
     data['lead_status'] = lead_status['value']
     data['lead_status_proba'] = lead_status['proba']
     leads = {}
     leads['leads'] = [data]
     url = os.getenv('CONNECTOR_CLASSIFICATION_WEBHOOK', 'http://intellead-connector:3000/intellead-webhook')
-    r = requests.post(url, json=leads)
+    r = requests.post(url, json=leads, headers=headers)
     print('The lead ' + data['email'] + ' was sent to intellead-connector with status code: ' + str(r.status_code))
 
 
