@@ -243,4 +243,4 @@ request.get('https://your_domain.com/lead_status_by_id/'+lead_id);
 ```
 
 <h3>Copyrights and Licence</h3>
-TO DO
+Project copyright and license is available at <a href="https://github.com/intellead/intellead-classification/blob/master/LICENSE">LICENSE</a>.
