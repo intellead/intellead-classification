@@ -1,20 +1,18 @@
-<h1>Intellead Classification</h1>
+# Intellead Classification
 
+[![Build Status](https://travis-ci.org/intellead/intellead-classification.svg?branch=master)](https://travis-ci.org/intellead/intellead-classification)
+[![codecov](https://codecov.io/gh/intellead/intellead-classification/branch/master/graph/badge.svg)](https://codecov.io/gh/intellead/intellead-classification)
 
 Intellead Classification aims to be an service to classify leads among qualified or unqualified.
 
-<h2>Description</h2>
+## Description
 
 This is the classification component of the intellead ecosystem, it implements the needed functionality classify leads.
 
-<h2>Python</h2>
+## Documentation
 
-This project use Python 3.6.2.
+Project documentation is available at [DOCUMENTATION.md](./DOCUMENTATION.md).
 
-<h2>Documentation</h2>
+## Contributing
 
-Project documentation is available at <a href="https://github.com/intellead/intellead-classification/blob/master/DOCUMENTATION.md">DOCUMENTATION.md</a>.
-
-<h2>Contributing</h2>
-
-See the <a href="https://github.com/intellead/intellead-classification/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> document for details.
+See the [CONTRIBUTING.md](./CONTRIBUTING.md) document for details.
