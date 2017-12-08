@@ -1,5 +1,9 @@
 language: python
 python:
   - 3.6
+install:
+  - pip install codecov
 script:
-  - pytest tests/*
+  - coverage run tests/test.py
+after_success:
+  - codecov
