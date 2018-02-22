@@ -19,7 +19,6 @@
 import requests
 import json
 from flask import Flask, abort, request
-import normalize
 import service
 import os
 
@@ -40,7 +39,9 @@ def get_lead_status_by_id(lead_id):
     json_lead = get_data_from_lead(token, lead_id)
     if (json_lead is None) | (json_lead == ''):
         abort(404)
-    normalized_data = normalize.lead(json_lead)
+    normalized_data = normalize_lead_data(token, json_lead)
+    if (normalized_data is None) | (normalized_data == ''):
+        abort(404)
     lead_status = service.classification(normalized_data)
     save_lead_status(token, lead_id, lead_status)
     send_data_to_connector(token, json_lead['lead'], lead_status)
@@ -88,6 +89,20 @@ def send_data_to_connector(token, data, lead_status):
     url = os.getenv('CONNECTOR_CLASSIFICATION_WEBHOOK', 'http://intellead-connector:3000/intellead-webhook')
     r = requests.post(url, json=leads, headers=headers)
     print('The lead ' + data['email'] + ' was sent to intellead-connector with status code: ' + str(r.status_code))
+
+
+def normalize_lead_data(token, data):
+    headers = {
+        'token': token
+    }
+    url = os.getenv('NORMALIZATION_URL', 'http://intellead-normalization:3000/normalize')
+    response = requests.post(url, json=data, headers=headers)
+    if response.status_code == 200:
+        normalized_data = response.json()
+        print(normalized_data)
+        return normalized_data
+    else:
+        return None
 
 
 if __name__ == '__main__':
