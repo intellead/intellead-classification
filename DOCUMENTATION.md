@@ -70,6 +70,7 @@ For this it is necessary to configure the URL variables.<br>
 You must config the following vars:<br>
 DATA_LEAD_INFO_URL - Full URL of Lead Info API from Data Service;<br>
 DATA_SAVE_LEAD_STATUS_URL - Full URL of Save Lead Status API from Data Service;<br>
+NORMALIZATION_URL - Full URL of normalize endpoint from Normalization Service;<br>
 CONNECTOR_CLASSIFICATION_WEBHOOK - Full URL of Classification Webhook API from Connector Service.
 <h3>Dataset</h3>
 This dataset contains leads from construction industry.<br>
