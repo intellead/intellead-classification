@@ -19,7 +19,6 @@ scipy>=0.15.1
 scikit-learn==0.18.2
 matplotlib>=1.4.3
 pandas>=0.19
-sklearn
 requests==2.9.1
 ipython
 psycopg2
