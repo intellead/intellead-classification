@@ -17,6 +17,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
 import psycopg2
+from psycopg2.extensions import AsIs
 import os
 from boto.s3.connection import S3Connection
 
@@ -66,6 +67,25 @@ def convert_dict_to_tuple(data):
     if 'main_activity' in data.keys():
         data_tuple = data_tuple + (data['main_activity'],)
     return data_tuple
+
+
+def save_lead_in_dataset(data):
+    try:
+        columns = ['email', 'job_title', 'lead_profile', 'conversions', 'area', 'number_employees', 'segment', 'work_in_progress', 'source_first_conversion', 'source_last_conversion', 'concern', 'looking_for_management_software']
+        if 'main_activity' in data.keys():
+            columns.append('cnae')
+        values = ((data['email'],) + convert_dict_to_tuple(data))
+        insert_statement = 'insert into dataset (%s) values %s'
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(insert_statement, (AsIs(','.join(columns)), tuple(values)))
+        conn.commit()
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
 
 
 def get_dataset_input_from_database(fields):

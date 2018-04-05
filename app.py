@@ -21,6 +21,7 @@ import json
 from flask import Flask, abort, request
 import service
 import os
+from flask import Response
 
 app = Flask(__name__)
 
@@ -30,7 +31,7 @@ def get_lead_status_by_id(lead_id):
     url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
     token = request.headers.get('token')
     if requests.post(url + '/' + str(token)).status_code != 200:
-        abort(403)
+        abort(401)
     json_lead = get_data_from_lead(token, lead_id)
     if (json_lead is None) | (json_lead == ''):
         abort(404)
@@ -41,6 +42,19 @@ def get_lead_status_by_id(lead_id):
     save_lead_status(token, lead_id, lead_status)
     send_data_to_connector(token, json_lead['lead'], lead_status)
     return str(lead_status['value'])
+
+
+@app.route('/save_lead_in_dataset', methods=['POST'])
+def save_lead_in_dataset():
+    url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
+    token = request.headers.get('token')
+    if requests.post(url + '/' + str(token)).status_code != 200:
+        abort(401)
+    normalized_data = request.get_json()
+    if (normalized_data is None) | (normalized_data == ''):
+        abort(412)
+    service.save_lead_in_dataset(normalized_data)
+    return Response(status=201)
 
 
 def get_data_from_lead(token, lead_id):
