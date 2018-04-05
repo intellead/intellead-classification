@@ -25,11 +25,6 @@ import os
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    return "Intellead Classification"
-
-
 @app.route('/lead_status_by_id/<int:lead_id>', methods=['GET'])
 def get_lead_status_by_id(lead_id):
     url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
