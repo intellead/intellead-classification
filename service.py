@@ -25,14 +25,14 @@ from boto.s3.connection import S3Connection
 s3 = S3Connection(os.getenv('DATABASE_NAME', 'postgres'), os.getenv('DATABASE_USER', 'postgres'), os.getenv('DATABASE_PASSWORD', 'postgres'), os.getenv('DATABASE_HOST', 'intellead-classification-postgresql'), os.getenv('DATABASE_PORT', 5432))
 
 
-def classification(lead):
+def classification(customer, lead):
     #classifiers = [
     #    ('ab', AdaBoostClassifier()),
     #    ('dt', DecisionTreeClassifier(max_depth=5)),
     #    ('kn', KNeighborsClassifier(16)),
     #]
-    inputs = get_dataset_input_from_database(lead.keys())
-    outputs = get_dataset_output_from_database()
+    inputs = get_dataset_input_from_database(customer, lead.keys())
+    outputs = get_dataset_output_from_database(customer)
     print('The total number of examples in the dataset is: %d' % (len(inputs)))
     inputs_training, inputs_test, outputs_training, outputs_test = train_test_split(inputs, outputs, test_size=0.3, random_state=42)
     print('The number of examples used for training are: %d' % (len(inputs_training)))
@@ -88,15 +88,15 @@ def save_lead_in_dataset(data):
             conn.close()
 
 
-def get_dataset_input_from_database(fields):
+def get_dataset_input_from_database(customer, fields):
     rows = [];
     try:
         conn = get_connection()
         cur = conn.cursor()
         if 'main_activity' in fields:
-            cur.execute('SELECT job_title, lead_profile, conversions, area, number_employees, segment, work_in_progress, source_first_conversion, source_last_conversion, concern, looking_for_management_software, cnae FROM dataset')
+            cur.execute('SELECT job_title, lead_profile, conversions, area, number_employees, segment, work_in_progress, source_first_conversion, source_last_conversion, concern, looking_for_management_software, cnae FROM dataset WHERE customer = %s', [customer])
         else:
-            cur.execute('SELECT job_title, lead_profile, conversions, area, number_employees, segment, work_in_progress, source_first_conversion, source_last_conversion, concern, looking_for_management_software FROM dataset')
+            cur.execute('SELECT job_title, lead_profile, conversions, area, number_employees, segment, work_in_progress, source_first_conversion, source_last_conversion, concern, looking_for_management_software FROM dataset WHERE customer = %s', [customer])
         rows = cur.fetchall()
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
@@ -107,12 +107,12 @@ def get_dataset_input_from_database(fields):
             return np.array(rows)
 
 
-def get_dataset_output_from_database():
+def get_dataset_output_from_database(customer):
     rows = [];
     try:
         conn = get_connection()
         cur = conn.cursor()
-        cur.execute('SELECT lead_status FROM dataset')
+        cur.execute('SELECT lead_status FROM dataset WHERE customer = %s', [customer])
         rows = cur.fetchall()
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
