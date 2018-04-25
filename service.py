@@ -62,8 +62,51 @@ def classification(customer, lead):
     return lead_status_dict
 
 
-def convert_dict_to_tuple(data):
-    return (data['role'], data['profile'], data['conversion'], data['lead_area'], data['number_of_employees'], data['company_segment'], data['wip'], data['source_first_conv'], data['source_last_conv'], data['concern'], data['looking_for_a_software'], data['main_activity'])
+def get_dataset_input_from_database(customer):
+    rows = [];
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(' SELECT '
+                    '     field.name AS name, '
+                    '     example.value AS val '
+                    ' FROM '
+                    '     examples example '
+                    '     INNER JOIN fields field ON example.field_id = field.id '
+                    ' WHERE '
+                    '     field.type = \'type\' '
+                    '     AND field.customer = %s ', [customer])
+        rows = cur.fetchall()
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            return np.array(rows)
+
+
+def get_dataset_output_from_database(customer):
+    rows = [];
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(' SELECT '
+                    '     example.value '
+                    ' FROM '
+                    '     examples example '
+                    '     INNER JOIN fields field ON example.field_id = field.id '
+                    ' WHERE '
+                    '     field.type = \'output\' '
+                    '     AND field.customer = %s ', [customer])
+        rows = cur.fetchall()
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            return np.array(rows)
 
 
 def save_lead_in_dataset(data):
@@ -83,36 +126,8 @@ def save_lead_in_dataset(data):
             conn.close()
 
 
-def get_dataset_input_from_database(customer):
-    rows = [];
-    try:
-        conn = get_connection()
-        cur = conn.cursor()
-        cur.execute('SELECT job_title, lead_profile, conversions, area, number_employees, segment, work_in_progress, source_first_conversion, source_last_conversion, concern, looking_for_management_software, cnae FROM dataset WHERE customer = %s', [customer])
-        rows = cur.fetchall()
-        cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            return np.array(rows)
-
-
-def get_dataset_output_from_database(customer):
-    rows = [];
-    try:
-        conn = get_connection()
-        cur = conn.cursor()
-        cur.execute('SELECT lead_status FROM dataset WHERE customer = %s', [customer])
-        rows = cur.fetchall()
-        cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            return np.array(rows)
+def convert_dict_to_tuple(data):
+    return (data['role'], data['profile'], data['conversion'], data['lead_area'], data['number_of_employees'], data['company_segment'], data['wip'], data['source_first_conv'], data['source_last_conv'], data['concern'], data['looking_for_a_software'], data['main_activity'])
 
 
 def get_connection():
