@@ -99,7 +99,7 @@ def send_data_to_connector(token, data, lead_status):
     leads['leads'] = [data]
     url = os.getenv('CONNECTOR_CLASSIFICATION_WEBHOOK', 'http://intellead-connector:3000/intellead-webhook')
     r = requests.post(url, json=leads, headers=headers)
-    print('The lead ' + data['email'] + ' was sent to intellead-connector with status code: ' + str(r.status_code))
+    print('The lead ' + data['_id'] + ' was sent to intellead-connector with status code: ' + str(r.status_code), file=sys.stderr)
 
 
 def normalize_lead_data(token, data):
