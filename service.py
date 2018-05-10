@@ -26,11 +26,6 @@ s3 = S3Connection(os.getenv('DATABASE_NAME', 'postgres'), os.getenv('DATABASE_US
 
 
 def classification(customer, lead):
-    #classifiers = [
-    #    ('ab', AdaBoostClassifier()),
-    #    ('dt', DecisionTreeClassifier(max_depth=5)),
-    #    ('kn', KNeighborsClassifier(16)),
-    #]
     inputs = get_dataset_input_from_database(customer)
     outputs = get_dataset_output_from_database(customer)
     print('The total number of examples in the dataset is: %d' % (len(inputs)))
@@ -40,9 +35,6 @@ def classification(customer, lead):
     knn = KNeighborsClassifier(n_neighbors=7, p=2)
     knn.fit(inputs_training, np.ravel(outputs_training))
     print('[K=7] The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
-    #voting_classifier = VotingClassifier(estimators=classifiers, voting='hard')
-    #voting_classifier = voting_classifier.fit(inputs_training, np.ravel(outputs_training))
-    #print('The probability of the machine to be right is: %f%%' % (voting_classifier.score(inputs_test, outputs_test) * 100))
     print('Lead data:')
     print(lead)
     data_to_predict = convert_dict_to_tuple(lead, customer)
@@ -50,7 +42,6 @@ def classification(customer, lead):
     print(data_to_predict)
     lead_status = knn.predict(data_to_predict)
     lead_status_value = lead_status[0]
-    #lead_status = voting_classifier.predict(data_to_predict)
     print('According to lead data, his status is: %s' % (lead_status_value))
     print('[0] unqualified [1] qualified')
     proba = knn.predict_proba(data_to_predict)
@@ -204,7 +195,8 @@ def convert_dict_to_tuple(data, customer):
             conn.close()
             tup = ()
             for index, row in enumerate(np.array(rows)):
-                tup += data[row[0]]
+                tup += (data[row[0]],)
+            return tup
 
 
 def get_connection():
