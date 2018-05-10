@@ -45,13 +45,13 @@ def classification(customer, lead):
     #print('The probability of the machine to be right is: %f%%' % (voting_classifier.score(inputs_test, outputs_test) * 100))
     print('Lead data:')
     print(lead)
-    data_to_predict = convert_dict_to_tuple(lead)
+    data_to_predict = convert_dict_to_tuple(lead, customer)
     print('Lead data to predict:')
     print(data_to_predict)
     lead_status = knn.predict(data_to_predict)
     lead_status_value = lead_status[0]
     #lead_status = voting_classifier.predict(data_to_predict)
-    print('According to lead data, his status is: %d' % (lead_status_value))
+    print('According to lead data, his status is: %s' % (lead_status_value))
     print('[0] unqualified [1] qualified')
     proba = knn.predict_proba(data_to_predict)
     max_proba = max(proba[0])
@@ -68,14 +68,16 @@ def get_dataset_input_from_database(customer):
         conn = get_connection()
         cur = conn.cursor()
         cur.execute(' SELECT '
-                    '     field.name AS name, '
-                    '     example.value AS val '
+                    '     example_value.value '
                     ' FROM '
-                    '     examples example '
-                    '     INNER JOIN fields field ON example.field_id = field.id '
+                    '     example_values example_value '
+                    '     INNER JOIN fields field ON example_value.field_id = field.id '
                     ' WHERE '
-                    '     field.type = \'type\' '
-                    '     AND field.customer = %s ', [customer])
+                    '     field.type = \'input\' '
+                    '     AND field.customer = %s '
+                    ' ORDER BY '
+                    '     example_value.example_id , '
+                    '     field.name ', [customer])
         rows = cur.fetchall()
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
@@ -83,7 +85,60 @@ def get_dataset_input_from_database(customer):
     finally:
         if conn is not None:
             conn.close()
-            return np.array(rows)
+            return join_rows(customer, rows)
+
+
+def join_rows(customer, rows):
+    fields = count_fields(customer)
+    examples = count_examples(customer)
+    rows_array = np.array(rows)
+    joined = [[0 for x in range(fields)] for y in range(examples)]
+    for index, row in enumerate(rows_array):
+        field = index % fields
+        example = index // fields
+        joined[example][field] = row[0]
+    return joined
+
+
+def count_fields(customer):
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(' SELECT '
+                    '     COUNT(*) '
+                    ' FROM '
+                    '     fields field '
+                    ' WHERE '
+                    '     field.type = \'input\' '
+                    '     AND field.customer = %s ', [customer])
+        count = cur.fetchone()
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            return count[0]
+
+
+def count_examples(customer):
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(' SELECT '
+                    '     COUNT(*) '
+                    ' FROM '
+                    '     examples example '
+                    ' WHERE '
+                    '     example.customer = %s ', [customer])
+        count = cur.fetchone()
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            return count[0]
 
 
 def get_dataset_output_from_database(customer):
@@ -92,10 +147,10 @@ def get_dataset_output_from_database(customer):
         conn = get_connection()
         cur = conn.cursor()
         cur.execute(' SELECT '
-                    '     example.value '
+                    '     example_value.value '
                     ' FROM '
-                    '     examples example '
-                    '     INNER JOIN fields field ON example.field_id = field.id '
+                    '     example_values example_value '
+                    '     INNER JOIN fields field ON example_value.field_id = field.id '
                     ' WHERE '
                     '     field.type = \'output\' '
                     '     AND field.customer = %s ', [customer])
@@ -126,8 +181,30 @@ def save_lead_in_dataset(data):
             conn.close()
 
 
-def convert_dict_to_tuple(data):
-    return (data['role'], data['profile'], data['conversion'], data['lead_area'], data['number_of_employees'], data['company_segment'], data['wip'], data['source_first_conv'], data['source_last_conv'], data['concern'], data['looking_for_a_software'], data['main_activity'])
+def convert_dict_to_tuple(data, customer):
+    rows = [];
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(' SELECT '
+                    '     field.name '
+                    ' FROM '
+                    '     fields field '
+                    ' WHERE '
+                    '     field.type = \'input\' '
+                    '     AND field.customer = %s '
+                    ' ORDER BY '
+                    '     field.name ', [customer])
+        rows = cur.fetchall()
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            tup = ()
+            for index, row in enumerate(np.array(rows)):
+                tup += data[row[0]]
 
 
 def get_connection():
