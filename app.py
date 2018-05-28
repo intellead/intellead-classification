@@ -22,6 +22,7 @@ from flask import Flask, abort, request
 import service
 import os
 from flask import Response
+import sys
 
 app = Flask(__name__)
 
@@ -41,8 +42,11 @@ def get_lead_status_by_id(lead_id):
         abort(404)
     security_response_json = security_response.json()
     lead_status = service.classification(security_response_json['id'], normalized_data)
+    print('Classified', file=sys.stderr)
     save_lead_status(token, lead_id, lead_status)
+    print('Lead status saved', file=sys.stderr)
     send_data_to_connector(token, json_lead['lead'], lead_status)
+    print('Data sent to connector', file=sys.stderr)
     return str(lead_status['value'])
 
 
@@ -50,12 +54,14 @@ def get_lead_status_by_id(lead_id):
 def save_lead_in_dataset():
     url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
     token = request.headers.get('token')
-    if requests.post(url + '/' + str(token)).status_code != 200:
+    security_response = requests.post(url + '/' + str(token))
+    if security_response.status_code != 200:
         abort(401)
     normalized_data = request.get_json()
     if (normalized_data is None) | (normalized_data == ''):
         abort(412)
-    service.save_lead_in_dataset(normalized_data)
+    security_response_json = security_response.json()
+    service.save_lead_in_dataset(normalized_data, security_response_json['id'])
     return Response(status=201)
 
 
@@ -76,6 +82,7 @@ def get_data_from_lead(token, lead_id):
 
 
 def save_lead_status(token, lead_id, lead_status):
+    print('save_lead_status')
     headers = {
         'content-type': 'application/json',
         'cache-control': 'no-cache',

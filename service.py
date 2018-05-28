@@ -20,6 +20,7 @@ import psycopg2
 from psycopg2.extensions import AsIs
 import os
 from boto.s3.connection import S3Connection
+import sys
 
 
 s3 = S3Connection(os.getenv('DATABASE_NAME', 'postgres'), os.getenv('DATABASE_USER', 'postgres'), os.getenv('DATABASE_PASSWORD', 'postgres'), os.getenv('DATABASE_HOST', 'intellead-classification-postgresql'), os.getenv('DATABASE_PORT', 5432))
@@ -155,30 +156,104 @@ def get_dataset_output_from_database(customer):
             return np.array(rows)
 
 
-def save_lead_in_dataset(data):
+def save_lead_in_dataset(data, customer):
+    example_id = max_example_id() + 1
+    example_value_id = max_example_value_id() + 1
+    save_example_in_dataset(example_id, customer)
     try:
-        columns = ['email', 'job_title', 'lead_profile', 'conversions', 'area', 'number_employees', 'segment', 'work_in_progress', 'source_first_conversion', 'source_last_conversion', 'concern', 'looking_for_management_software', 'cnae']
-        values = ((data['email'],) + convert_dict_to_tuple(data))
-        insert_statement = 'insert into dataset (%s) values %s'
+        fields = get_customer_fields(customer)
+        inserts = []
+        for column in fields:
+            id = example_value_id
+            example_value_id += 1
+            field_id = int(column[1])
+            value = str(data[column[0]])
+            insert = (id, example_id, field_id, value)
+            inserts.append(insert)
+
+        inserts.append((example_value_id, example_id, get_customer_output_field(customer), '1'))
+        inserts.append((example_value_id, example_id, get_customer_email_field(customer), data['email']))
+
         conn = get_connection()
         cur = conn.cursor()
-        cur.execute(insert_statement, (AsIs(','.join(columns)), tuple(values)))
+        for insert in inserts:
+            cur.execute('insert into example_values (id, example_id, field_id, value) values %s', (insert,))
         conn.commit()
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error, file=sys.stderr)
+    finally:
+        if conn is not None:
+            conn.close()
+
+
+def save_example_in_dataset(example_id, customer):
+    try:
+        columns = ['id', 'customer']
+        values = (example_id, customer)
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute('insert into examples (%s) values %s', (AsIs(','.join(columns)), tuple(values)))
+        conn.commit()
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error, file=sys.stderr)
+    finally:
+        if conn is not None:
+            conn.close()
+
+
+def max_example_id():
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(' SELECT '
+                    '     MAX(example.id) '
+                    ' FROM '
+                    '     examples example ')
+        max = cur.fetchone()
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
             conn.close()
+            return max[0]
+
+
+def max_example_value_id():
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(' SELECT '
+                    '     MAX(example_value.id) '
+                    ' FROM '
+                    '     example_values example_value ')
+        max = cur.fetchone()
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            return max[0]
 
 
 def convert_dict_to_tuple(data, customer):
+    tup = ()
+    for index, row in enumerate(get_customer_fields(customer)):
+        tup += (data[row[0]],)
+    return tup
+
+
+def get_customer_fields(customer):
     rows = [];
     try:
         conn = get_connection()
         cur = conn.cursor()
         cur.execute(' SELECT '
-                    '     field.name '
+                    '     field.name, '
+                    '     field.id '
                     ' FROM '
                     '     fields field '
                     ' WHERE '
@@ -193,10 +268,56 @@ def convert_dict_to_tuple(data, customer):
     finally:
         if conn is not None:
             conn.close()
-            tup = ()
-            for index, row in enumerate(np.array(rows)):
-                tup += (data[row[0]],)
-            return tup
+            return np.array(rows)
+
+
+def get_customer_output_field(customer):
+    id = None
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(' SELECT '
+                    '     field.id '
+                    ' FROM '
+                    '     fields field '
+                    ' WHERE '
+                    '     field.type = \'output\' '
+                    '     AND field.customer = %s '
+                    ' ORDER BY '
+                    '     field.name ', [customer])
+        id = cur.fetchone()[0]
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            return id
+
+
+def get_customer_email_field(customer):
+    id = None
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(' SELECT '
+                    '     field.id '
+                    ' FROM '
+                    '     fields field '
+                    ' WHERE '
+                    '     field.type = \'id\' '
+                    '     AND field.customer = %s '
+                    '     AND field.name = \'email\' '
+                    ' ORDER BY '
+                    '     field.name ', [customer])
+        id = cur.fetchone()[0]
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            return id
 
 
 def get_connection():
