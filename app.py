@@ -30,7 +30,8 @@ app = Flask(__name__)
 def get_lead_status_by_id(lead_id):
     url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
     token = request.headers.get('token')
-    if requests.post(url + '/' + str(token)).status_code != 200:
+    security_response = requests.post(url + '/' + str(token))
+    if security_response.status_code != 200:
         abort(401)
     json_lead = get_data_from_lead(token, lead_id)
     if (json_lead is None) | (json_lead == ''):
@@ -38,9 +39,13 @@ def get_lead_status_by_id(lead_id):
     normalized_data = normalize_lead_data(token, json_lead)
     if (normalized_data is None) | (normalized_data == ''):
         abort(404)
-    lead_status = service.classification(normalized_data)
+    security_response_json = security_response.json()
+    lead_status = service.classification(security_response_json['id'], normalized_data)
+    print('Classified')
     save_lead_status(token, lead_id, lead_status)
+    print('Lead status saved')
     send_data_to_connector(token, json_lead['lead'], lead_status)
+    print('Data sent to connector')
     return str(lead_status['value'])
 
 
@@ -48,12 +53,14 @@ def get_lead_status_by_id(lead_id):
 def save_lead_in_dataset():
     url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
     token = request.headers.get('token')
-    if requests.post(url + '/' + str(token)).status_code != 200:
+    security_response = requests.post(url + '/' + str(token))
+    if security_response.status_code != 200:
         abort(401)
     normalized_data = request.get_json()
     if (normalized_data is None) | (normalized_data == ''):
         abort(412)
-    service.save_lead_in_dataset(normalized_data)
+    security_response_json = security_response.json()
+    service.save_lead_in_dataset(normalized_data, security_response_json['id'])
     return Response(status=201)
 
 
@@ -74,6 +81,7 @@ def get_data_from_lead(token, lead_id):
 
 
 def save_lead_status(token, lead_id, lead_status):
+    print('save_lead_status')
     headers = {
         'content-type': 'application/json',
         'cache-control': 'no-cache',
@@ -97,7 +105,7 @@ def send_data_to_connector(token, data, lead_status):
     leads['leads'] = [data]
     url = os.getenv('CONNECTOR_CLASSIFICATION_WEBHOOK', 'http://intellead-connector:3000/intellead-webhook')
     r = requests.post(url, json=leads, headers=headers)
-    print('The lead ' + data['email'] + ' was sent to intellead-connector with status code: ' + str(r.status_code))
+    print('The lead ' + data['_id'] + ' was sent to intellead-connector with status code: ' + str(r.status_code))
 
 
 def normalize_lead_data(token, data):
