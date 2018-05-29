@@ -22,7 +22,6 @@ from flask import Flask, abort, request
 import service
 import os
 from flask import Response
-import sys
 
 app = Flask(__name__)
 
@@ -42,11 +41,11 @@ def get_lead_status_by_id(lead_id):
         abort(404)
     security_response_json = security_response.json()
     lead_status = service.classification(security_response_json['id'], normalized_data)
-    print('Classified', file=sys.stderr)
+    print('Classified')
     save_lead_status(token, lead_id, lead_status)
-    print('Lead status saved', file=sys.stderr)
+    print('Lead status saved')
     send_data_to_connector(token, json_lead['lead'], lead_status)
-    print('Data sent to connector', file=sys.stderr)
+    print('Data sent to connector')
     return str(lead_status['value'])
 
 
@@ -106,7 +105,7 @@ def send_data_to_connector(token, data, lead_status):
     leads['leads'] = [data]
     url = os.getenv('CONNECTOR_CLASSIFICATION_WEBHOOK', 'http://intellead-connector:3000/intellead-webhook')
     r = requests.post(url, json=leads, headers=headers)
-    print('The lead ' + data['_id'] + ' was sent to intellead-connector with status code: ' + str(r.status_code), file=sys.stderr)
+    print('The lead ' + data['_id'] + ' was sent to intellead-connector with status code: ' + str(r.status_code))
 
 
 def normalize_lead_data(token, data):

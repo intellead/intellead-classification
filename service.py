@@ -20,7 +20,6 @@ import psycopg2
 from psycopg2.extensions import AsIs
 import os
 from boto.s3.connection import S3Connection
-import sys
 
 
 s3 = S3Connection(os.getenv('DATABASE_NAME', 'postgres'), os.getenv('DATABASE_USER', 'postgres'), os.getenv('DATABASE_PASSWORD', 'postgres'), os.getenv('DATABASE_HOST', 'intellead-classification-postgresql'), os.getenv('DATABASE_PORT', 5432))
@@ -181,7 +180,7 @@ def save_lead_in_dataset(data, customer):
         conn.commit()
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
-        print(error, file=sys.stderr)
+        print(error)
     finally:
         if conn is not None:
             conn.close()
@@ -197,7 +196,7 @@ def save_example_in_dataset(example_id, customer):
         conn.commit()
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
-        print(error, file=sys.stderr)
+        print(error)
     finally:
         if conn is not None:
             conn.close()
