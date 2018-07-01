@@ -22,12 +22,12 @@ from flask import Flask, abort, request
 import service
 import os
 from flask import Response
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'token'
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/lead_status_by_id/<int:lead_id>', methods=['GET'])
 def get_lead_status_by_id(lead_id):
@@ -68,6 +68,7 @@ def save_lead_in_dataset():
 
 
 @app.route('/demo', methods=['POST', 'OPTIONS'])
+@cross_origin(origin='*',headers=['Content- Type','Accept', 'token'])
 def demo():
     url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
     token = request.headers.get('token')
