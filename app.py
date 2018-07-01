@@ -75,10 +75,10 @@ def demo():
         abort(401)
     json_lead = request.get_json()
     if (json_lead is None) | (json_lead == ''):
-        abort(404)
+        abort(412)
     normalized_data = normalize_lead_data(token, json_lead)
     if (normalized_data is None) | (normalized_data == ''):
-        abort(404)
+        abort(500)
     security_response_json = security_response.json()
     lead_status = service.classification(security_response_json['id'], normalized_data)
     return json.dumps(lead_status)
