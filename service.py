@@ -62,13 +62,15 @@ def get_dataset_input_from_database(customer):
                     '     example_value.value '
                     ' FROM '
                     '     example_values example_value '
+                    '     INNER JOIN examples example ON example.id = example_value.example_id '
                     '     INNER JOIN fields field ON example_value.field_id = field.id '
                     ' WHERE '
-                    '     field.type = \'input\' '
+                    '     example.customer = %s '
+                    '     AND field.type = \'input\' '
                     '     AND field.customer = %s '
                     ' ORDER BY '
                     '     example_value.example_id , '
-                    '     field.name ', [customer])
+                    '     field.name ', [customer, customer])
         rows = cur.fetchall()
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
@@ -141,10 +143,12 @@ def get_dataset_output_from_database(customer):
                     '     example_value.value '
                     ' FROM '
                     '     example_values example_value '
+                    '     INNER JOIN examples example ON example.id = example_value.example_id '
                     '     INNER JOIN fields field ON example_value.field_id = field.id '
                     ' WHERE '
-                    '     field.type = \'output\' '
-                    '     AND field.customer = %s ', [customer])
+                    '     example.customer = %s '
+                    '     AND field.type = \'output\' '
+                    '     AND field.customer = %s ', [customer, customer])
         rows = cur.fetchall()
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:

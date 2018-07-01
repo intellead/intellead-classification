@@ -22,9 +22,11 @@ from flask import Flask, abort, request
 import service
 import os
 from flask import Response
+from flask_cors import CORS
 
 app = Flask(__name__)
 
+cors = CORS(app)
 
 @app.route('/lead_status_by_id/<int:lead_id>', methods=['GET'])
 def get_lead_status_by_id(lead_id):
@@ -62,6 +64,24 @@ def save_lead_in_dataset():
     security_response_json = security_response.json()
     service.save_lead_in_dataset(normalized_data, security_response_json['id'])
     return Response(status=201)
+
+
+@app.route('/demo', methods=['POST'])
+def demo():
+    url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
+    token = request.headers.get('token')
+    security_response = requests.post(url + '/' + str(token))
+    if security_response.status_code != 200:
+        abort(401)
+    json_lead = request.get_json()
+    if (json_lead is None) | (json_lead == ''):
+        abort(404)
+    normalized_data = normalize_lead_data(token, json_lead)
+    if (normalized_data is None) | (normalized_data == ''):
+        abort(404)
+    security_response_json = security_response.json()
+    lead_status = service.classification(security_response_json['id'], normalized_data)
+    return json.dumps(lead_status)
 
 
 def get_data_from_lead(token, lead_id):
