@@ -68,7 +68,7 @@ def save_lead_in_dataset():
 
 
 @app.route('/demo', methods=['POST', 'OPTIONS'])
-@cross_origin(origin='*',headers=['Content- Type','Accept', 'token'])
+@cross_origin(origin='*', headers=['Content-Type', 'Accept', 'token'])
 def demo():
     url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
     token = request.headers.get('token')
