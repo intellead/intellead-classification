@@ -66,7 +66,7 @@ def save_lead_in_dataset():
     return Response(status=201)
 
 
-@app.route('/demo', methods=['POST'])
+@app.route('/demo', methods=['POST', 'OPTIONS'])
 def demo():
     url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
     token = request.headers.get('token')
