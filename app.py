@@ -27,6 +27,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 cors = CORS(app)
+app.config['CORS_HEADERS'] = 'token'
 
 @app.route('/lead_status_by_id/<int:lead_id>', methods=['GET'])
 def get_lead_status_by_id(lead_id):
