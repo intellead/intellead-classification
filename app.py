@@ -86,24 +86,6 @@ def demo():
     return json.dumps(lead_status)
 
 
-@app.route('/test/<token>', methods=['POST', 'OPTIONS'])
-@cross_origin(origin='*', headers=['Content-Type', 'Accept', 'token'])
-def test(token):
-    url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
-    security_response = requests.post(url + '/' + str(token))
-    if security_response.status_code != 200:
-        abort(401)
-    json_lead = request.get_json()
-    if (json_lead is None) | (json_lead == ''):
-        abort(412)
-    normalized_data = normalize_lead_data(token, json_lead)
-    if (normalized_data is None) | (normalized_data == ''):
-        abort(500)
-    security_response_json = security_response.json()
-    service.classification(security_response_json['id'], normalized_data)
-    return Response(status=201)
-
-
 def get_data_from_lead(token, lead_id):
     headers = {
         'content-type': 'application/json',
