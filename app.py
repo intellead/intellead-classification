@@ -86,7 +86,7 @@ def demo():
     return json.dumps(lead_status)
 
 
-@app.route('/test/<int:token>', methods=['POST', 'OPTIONS'])
+@app.route('/test/<token>', methods=['POST', 'OPTIONS'])
 @cross_origin(origin='*', headers=['Content-Type', 'Accept', 'token'])
 def test(token):
     url = os.getenv('SECURITY_URL', 'http://intellead-security:8080/auth')
