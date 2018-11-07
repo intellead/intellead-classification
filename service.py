@@ -15,6 +15,7 @@
 
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 import psycopg2
 from psycopg2.extensions import AsIs
@@ -28,25 +29,25 @@ s3 = S3Connection(os.getenv('DATABASE_NAME', 'postgres'), os.getenv('DATABASE_US
 def classification(customer, lead):
     inputs = get_dataset_input_from_database(customer)
     outputs = get_dataset_output_from_database(customer)
-    print('The total number of examples in the dataset is: %d' % (len(inputs)))
-    inputs_training, inputs_test, outputs_training, outputs_test = train_test_split(inputs, outputs, test_size=0.3, random_state=42)
-    print('The number of examples used for training are: %d' % (len(inputs_training)))
-    print('The number of examples used for testing are: %d' % (len(inputs_test)))
-    knn = KNeighborsClassifier(n_neighbors=7, p=2)
-    knn.fit(inputs_training, np.ravel(outputs_training))
-    print('[K=7] The probability of the algorithm to be right is: %f%%' % (knn.score(inputs_test, outputs_test) * 100))
+    print('Examples in dataset is: %d' % (len(inputs)))
+    inputs_training, inputs_test, outputs_training, outputs_test = train_test_split(inputs, outputs, test_size=0.2, random_state=42)
+    print('Examples used for training is: %d' % (len(inputs_training)))
+    print('Examples used for testing is: %d' % (len(inputs_test)))
+    dt = DecisionTreeClassifier(max_depth=7)
+    dt.fit(inputs_training, outputs_training)
+    print('Score Trainning: %f%%' % (dt.score(inputs_training, outputs_training) * 100))
+    print('Score Test: %f%%' % (dt.score(inputs_test, outputs_test) * 100))
     print('Lead data:')
     print(lead)
     data_to_predict = convert_dict_to_tuple(lead, customer)
     print('Lead data to predict:')
     print(data_to_predict)
-    lead_status = knn.predict(data_to_predict)
+    lead_status = dt.predict(data_to_predict)
     lead_status_value = lead_status[0]
-    print('According to lead data, his status is: %s' % (lead_status_value))
-    print('[0] unqualified [1] qualified')
-    proba = knn.predict_proba(data_to_predict)
+    proba = dt.predict_proba(data_to_predict)
     max_proba = max(proba[0])
-    print('Proba is: %d%%' %(max_proba*100))
+    print('According to lead data, his status is: %s' % ("QUALIFICADO" if lead_status_value == 1 else "NÃO QUALIFICADO"))
+    print('Proba is: %d%%' % (max_proba*100))
     lead_status_dict = dict()
     dict.update(lead_status_dict, value=str(lead_status_value))
     dict.update(lead_status_dict, proba=str(max_proba))
