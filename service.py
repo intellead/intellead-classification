@@ -12,10 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+from classification_algorithm import ClassificationAlgorithm
 from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 import psycopg2
 from psycopg2.extensions import AsIs
@@ -27,31 +25,36 @@ s3 = S3Connection(os.getenv('DATABASE_NAME', 'postgres'), os.getenv('DATABASE_US
 
 
 def classification(customer, lead):
-    inputs = get_dataset_input_from_database(customer)
-    outputs = get_dataset_output_from_database(customer)
-    print('Examples in dataset is: %d' % (len(inputs)))
-    inputs_training, inputs_test, outputs_training, outputs_test = train_test_split(inputs, outputs, test_size=0.2, random_state=42)
-    print('Examples used for training is: %d' % (len(inputs_training)))
-    print('Examples used for testing is: %d' % (len(inputs_test)))
-    dt = DecisionTreeClassifier(max_depth=7)
-    dt.fit(inputs_training, outputs_training)
-    print('Score Trainning: %f%%' % (dt.score(inputs_training, outputs_training) * 100))
-    print('Score Test: %f%%' % (dt.score(inputs_test, outputs_test) * 100))
-    print('Lead data:')
-    print(lead)
-    data_to_predict = convert_dict_to_tuple(lead, customer)
-    print('Lead data to predict:')
-    print(data_to_predict)
-    lead_status = dt.predict(data_to_predict)
-    lead_status_value = lead_status[0]
-    proba = dt.predict_proba(data_to_predict)
-    max_proba = max(proba[0])
-    print('According to lead data, his status is: %s' % ("QUALIFICADO" if lead_status_value == 1 else "NÃO QUALIFICADO"))
-    print('Proba is: %d%%' % (max_proba*100))
-    lead_status_dict = dict()
-    dict.update(lead_status_dict, value=str(lead_status_value))
-    dict.update(lead_status_dict, proba=str(max_proba))
-    return lead_status_dict
+    try:
+        inputs = get_dataset_input_from_database(customer)
+        outputs = get_dataset_output_from_database(customer)
+        algorithm = get_algorithm(customer)
+        print('Examples in dataset is: %d' % (len(inputs)))
+        inputs_training, inputs_test, outputs_training, outputs_test = train_test_split(inputs, outputs, test_size=0.2, random_state=42)
+        print('Examples used for training is: %d' % (len(inputs_training)))
+        print('Examples used for testing is: %d' % (len(inputs_test)))
+        clf = algorithm
+        clf.fit(inputs_training, outputs_training)
+        print('Score Trainning: %f%%' % (clf.score(inputs_training, outputs_training) * 100))
+        print('Score Test: %f%%' % (clf.score(inputs_test, outputs_test) * 100))
+        print('Lead data:')
+        print(lead)
+        data_to_predict = convert_dict_to_tuple(lead, customer)
+        print('Lead data to predict:')
+        print(data_to_predict)
+        lead_status = clf.predict(data_to_predict)
+        lead_status_value = lead_status[0]
+        proba = clf.predict_proba(data_to_predict)
+        max_proba = max(proba[0])
+        print('According to lead data, his status is: %s' % ("QUALIFICADO" if lead_status_value == 1 else "NÃO QUALIFICADO"))
+        print('Proba is: %d%%' % (max_proba*100))
+        lead_status_dict = dict()
+        dict.update(lead_status_dict, value=str(lead_status_value))
+        dict.update(lead_status_dict, proba=str(max_proba))
+        return lead_status_dict
+    except Exception as ex:
+        print(ex)
+
 
 
 def get_dataset_input_from_database(customer):
@@ -322,6 +325,30 @@ def get_customer_email_field(customer):
         if conn is not None:
             conn.close()
             return id
+
+
+def get_algorithm(customer):
+    algorithm = None
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(' SELECT '
+                    '     algorithm '
+                    ' FROM '
+                    '     customer_config '
+                    ' WHERE '
+                    '     customer = %s ', [customer])
+        algorithm = cur.fetchone()[0]
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            if algorithm is not None:
+                print(algorithm)
+                return ClassificationAlgorithm[algorithm].value
+            return ClassificationAlgorithm.KNN.value
 
 
 def get_connection():
