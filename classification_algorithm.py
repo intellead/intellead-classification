@@ -15,6 +15,6 @@ class ClassificationAlgorithm(Enum):
     RF = RandomForestClassifier(max_depth=23, n_estimators=10, max_features=1)
     MLP = MLPClassifier(alpha=1)
     QDA = QuadraticDiscriminantAnalysis()
-    GNB = GaussianNB(),
-    SVC = SVC(gamma=2, C=1),
+    GNB = GaussianNB()
+    SVC = SVC(gamma=2, C=1)
     LSVC = SVC(kernel="linear", C=0.025)

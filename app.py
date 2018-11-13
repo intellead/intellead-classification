@@ -15,7 +15,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import requests
 import json
 from flask import Flask, abort, request
@@ -28,6 +27,7 @@ app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 @app.route('/lead_status_by_id/<int:lead_id>', methods=['GET'])
 def get_lead_status_by_id(lead_id):
