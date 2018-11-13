@@ -34,12 +34,7 @@ def classification(customer, lead):
         print('Examples used for training is: %d' % (len(inputs_training)))
         print('Examples used for testing is: %d' % (len(inputs_test)))
         clf = algorithm
-        print('clf: 37')
-        print(outputs_training)
-        print('ravel: 40')
-        print(np.ravel(outputs_training))
         clf.fit(inputs_training, np.ravel(outputs_training))
-        print('fit: 39')
         print('Score Trainning: %f%%' % (clf.score(inputs_training, outputs_training) * 100))
         print('Score Test: %f%%' % (clf.score(inputs_test, outputs_test) * 100))
         print('Lead data:')
@@ -59,7 +54,6 @@ def classification(customer, lead):
         return lead_status_dict
     except Exception as ex:
         print(ex)
-
 
 
 def get_dataset_input_from_database(customer):
@@ -351,7 +345,6 @@ def get_algorithm(customer):
         if conn is not None:
             conn.close()
             if algorithm is not None:
-                print(algorithm)
                 return ClassificationAlgorithm[algorithm].value
             return ClassificationAlgorithm.KNN.value
 
