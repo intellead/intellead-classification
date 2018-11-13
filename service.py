@@ -34,7 +34,9 @@ def classification(customer, lead):
         print('Examples used for training is: %d' % (len(inputs_training)))
         print('Examples used for testing is: %d' % (len(inputs_test)))
         clf = algorithm
+        print('clf: 37')
         clf.fit(inputs_training, np.ravel(outputs_training))
+        print('fit: 39')
         print('Score Trainning: %f%%' % (clf.score(inputs_training, outputs_training) * 100))
         print('Score Test: %f%%' % (clf.score(inputs_test, outputs_test) * 100))
         print('Lead data:')
