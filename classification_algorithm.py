@@ -17,4 +17,3 @@ class ClassificationAlgorithm(Enum):
     QDA = QuadraticDiscriminantAnalysis()
     GNB = GaussianNB()
     SVC = SVC(gamma=2, C=1)
-    LSVC = SVC(kernel="linear", C=0.025)
