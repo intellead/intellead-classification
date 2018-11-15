@@ -44,11 +44,8 @@ def get_lead_status_by_id(lead_id):
         abort(404)
     security_response_json = security_response.json()
     lead_status = service.classification(security_response_json['id'], normalized_data)
-    print('Classified')
     save_lead_status(token, lead_id, lead_status)
-    print('Lead status saved')
     send_data_to_connector(token, json_lead['lead'], lead_status)
-    print('Data sent to connector')
     return str(lead_status['value'])
 
 
@@ -113,7 +110,7 @@ def save_lead_status(token, lead_id, lead_status):
     data = {"lead_id": str(lead_id), "lead_status": lead_status}
     print(data)
     requests.post(url, data=json.dumps(data), json={'lead_id': str(lead_id)}, headers=headers)
-    print('The lead was sent to intellead-data')
+    print('Lead status saved')
 
 
 def send_data_to_connector(token, data, lead_status):

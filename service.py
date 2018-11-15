@@ -46,7 +46,7 @@ def classification(customer, lead):
         lead_status_value = lead_status[0]
         proba = clf.predict_proba(data_to_predict)
         max_proba = max(proba[0])
-        print('According to lead data, his status is: %s' % ("QUALIFICADO" if lead_status_value == 1 else "NÃO QUALIFICADO"))
+        print('According to lead data, his status is: %s' % ("QUALIFICADO" if lead_status_value == '1' else "NÃO QUALIFICADO"))
         print('Proba is: %d%%' % (max_proba*100))
         lead_status_dict = dict()
         dict.update(lead_status_dict, value=str(lead_status_value))
